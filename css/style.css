@@ -59,20 +59,35 @@ body {
     box-shadow: 0 5px 20px rgba(0,0,0,0.1);
     border: none;
     padding: 0.5rem;
-    max-height: 80vh;
+    max-height: 70vh;
     overflow-y: auto;
+    width: max-content;
+    min-width: 200px;
+    column-count: 1;
 }
 
 .dropdown-item {
     border-radius: 8px;
-    padding: 0.8rem 1rem;
+    padding: 0.5rem 1rem;
     transition: all 0.2s ease;
     white-space: normal;
+    font-size: 0.9rem;
+    line-height: 1.2;
+    margin-bottom: 0.2rem;
 }
 
 .dropdown-item:hover {
     background-color: var(--light-bg);
     transform: translateX(5px);
+}
+
+/* Larger screens - show multiple columns */
+@media (min-width: 992px) {
+    .dropdown-menu.large-menu {
+        column-count: 2;
+        min-width: 400px;
+        padding: 1rem;
+    }
 }
 
 .hero-section {
@@ -109,16 +124,55 @@ body {
     line-height: 1.6;
 }
 
-.calculator-card {
+#calculator-container {
+    width: 100%;
+    max-width: 100%;
+    padding: 1rem;
+    margin: 0 auto;
+}
+
+.calculator-content {
     background-color: white;
     border-radius: 15px;
     box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-    padding: clamp(1.5rem, 4vw, 2.5rem);
-    margin-bottom: 2rem;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    height: 100%;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    width: 100%;
+}
+
+.calculator-form {
     display: flex;
     flex-direction: column;
+    gap: 1rem;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.calculator-form .form-group {
+    margin-bottom: 0.8rem;
+}
+
+.calculator-form label {
+    font-weight: 500;
+    margin-bottom: 0.3rem;
+    font-size: 0.95rem;
+}
+
+.calculator-form input,
+.calculator-form select {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 0.95rem;
+}
+
+.calculator-result {
+    background-color: var(--light-bg);
+    padding: 1rem;
+    border-radius: 8px;
+    margin-top: 1rem;
+    text-align: center;
 }
 
 main {
@@ -150,9 +204,10 @@ main {
 }
 
 .btn {
-    padding: 0.8rem 1.5rem;
-    font-size: 1rem;
+    padding: 0.6rem 1.2rem;
+    font-size: 0.95rem;
     border-radius: 8px;
+    margin: 0.3rem;
 }
 
 .btn-primary {
@@ -196,34 +251,49 @@ main {
 
 /* Mobile Specific Styles */
 @media (max-width: 768px) {
-    .hero-section {
-        min-height: 40vh;
-        padding: 3rem 0;
-    }
-
     .navbar {
         padding: 0.6rem;
     }
 
     .navbar-collapse {
         background-color: white;
-        padding: 1rem;
+        padding: 0.8rem;
         border-radius: 12px;
         margin-top: 0.5rem;
         box-shadow: 0 5px 15px rgba(0,0,0,0.1);
     }
 
     .dropdown-menu {
-        margin: 0.5rem;
-        max-height: 60vh;
+        margin: 0.3rem;
+        max-height: 50vh;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        width: auto;
+        min-width: 0;
+        border: 1px solid rgba(0,0,0,0.1);
+    }
+
+    .dropdown-item {
+        padding: 0.5rem 0.8rem;
+        font-size: 0.95rem;
+        margin-bottom: 0.1rem;
+    }
+
+    .nav-item.dropdown {
+        margin-bottom: 0.3rem;
+    }
+
+    .hero-section {
+        min-height: 40vh;
+        padding: 3rem 0;
     }
 
     main {
         padding: 1rem;
     }
 
-    .calculator-card {
-        margin-bottom: 1rem;
+    .calculator-content {
+        padding: 1rem;
     }
 }
 
@@ -244,4 +314,38 @@ main {
         min-height: 100vh;
         padding: 2rem 0;
     }
+}
+
+/* Handle very small screens */
+@media (max-width: 360px) {
+    .calculator-form input,
+    .calculator-form select,
+    .btn {
+        font-size: 0.9rem;
+        padding: 0.4rem 0.8rem;
+    }
+
+    .dropdown-item {
+        font-size: 0.9rem;
+        padding: 0.4rem 0.6rem;
+    }
+}
+
+/* Make tables responsive */
+.table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin-bottom: 1rem;
+}
+
+table {
+    width: 100%;
+    min-width: 600px;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    font-size: 0.9rem;
 }
