@@ -188,24 +188,19 @@
     <section class="hero-section">
         <div class="container">
             <h1>Best Free Online Calculators for Finance, Health & Math</h1>
-            <div class="section-content">
-                <h2>General Tools - Unit & Currency Converter</h2>
-                <h2>Health Calculators - BMI, BMR, Body Fat & More</h2>
-                <h3>Finance Calculators - EMI, Interest, ROI & Investment</h3>
-            </div>
+            <p>Access a comprehensive suite of calculators for all your mathematical, financial, and health-related calculations. Simple, accurate, and free to use.</p>
         </div>
     </section>
 
-    <main class="container">
-        <div id="calculator-container">
-            <!-- Calculator content will be loaded here -->
+    <main>
+        <div class="container">
             <div class="row">
-                <div class="col-md-4 mb-4">
+                <div class="col-md-4">
                     <div class="calculator-card">
                         <h3>Popular Calculators</h3>
                         <ul class="list-unstyled">
-                            <li><a href="/scientific-calculator" class="btn btn-link" data-calculator="scientific-calculator">Scientific Calculator</a></li>
-                            <li><a href="/currency-converter" class="btn btn-link" data-calculator="currency-converter">Currency Converter</a></li>
+                            <li><a href="#" data-calculator="scientific-calculator">Scientific Calculator</a></li>
+                            <li><a href="#" data-calculator="currency-converter">Currency Converter</a></li>
                         </ul>
                     </div>
                 </div>
@@ -220,11 +215,11 @@
                             </div>
                             <div class="col-md-6">
                                 <h4>💰 Finance</h4>
-                                <p>EMI, interest rates, investments, and ROI calculations</p>
+                                <p>Interest rates, investments, and ROI calculations</p>
                             </div>
                             <div class="col-md-6">
                                 <h4>🏃 Health & Fitness</h4>
-                                <p>BMI, body fat, calories, and fitness tracking</p>
+                                <p>Body fat, calories, and fitness tracking</p>
                             </div>
                             <div class="col-md-6">
                                 <h4>⏰ Time & Date</h4>
@@ -236,6 +231,11 @@
             </div>
         </div>
     </main>
+
+    <!-- Calculator container for dynamically loaded calculators -->
+    <div id="calculator-container" class="container mt-4">
+        <!-- Calculators will be loaded here dynamically -->
+    </div>
 
     <footer class="site-footer">
         <div class="container">
