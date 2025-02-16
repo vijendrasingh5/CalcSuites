@@ -19,7 +19,12 @@ function loadCalculator(type) {
     const container = document.getElementById('calculator-container');
     
     // Clear previous calculator
-    container.innerHTML = '';
+    if (container) {
+        container.innerHTML = '';
+    } else {
+        console.error('Calculator container not found');
+        return;
+    }
     
     // Hide the hero section when showing a calculator
     const heroSection = document.querySelector('.hero-section');
@@ -323,75 +328,87 @@ function loadCalculator(type) {
         }
     } catch (error) {
         console.error('Error loading calculator:', error);
-        container.innerHTML = '<div class="alert alert-danger">Error loading calculator. Please try again.</div>';
+        container.innerHTML = '<div class="alert alert-danger">An error occurred while loading the calculator. Please try again later.</div>';
     }
 }
 
 function loadHomePage() {
-    // Clear any existing calculator
-    const container = document.getElementById('calculator-container');
-    
-    // Remove any existing content
-    container.innerHTML = '';
-    
-    // Show the hero section
-    const heroSection = document.querySelector('.hero-section');
-    if (heroSection) {
-        heroSection.style.display = 'block';
-    }
-    
-    // Add the home page content
-    container.innerHTML = `
-        <div class="row">
-            <div class="col-md-4 mb-4">
-                <div class="calculator-card">
-                    <h3>Popular Calculators</h3>
-                    <ul class="list-unstyled">
-                        <li><a href="#" onclick="loadCalculator('scientific-calculator')" class="btn btn-link">Scientific Calculator</a></li>
-                        <li><a href="#" onclick="loadCalculator('bmi')" class="btn btn-link">BMI Calculator</a></li>
-                        <li><a href="#" onclick="loadCalculator('currency-converter')" class="btn btn-link">Currency Converter</a></li>
-                    </ul>
+    try {
+        // Clear any existing calculator
+        const container = document.getElementById('calculator-container');
+        
+        // Remove any existing content
+        if (container) {
+            container.innerHTML = '';
+        } else {
+            console.error('Calculator container not found');
+            return;
+        }
+        
+        // Show the hero section
+        const heroSection = document.querySelector('.hero-section');
+        if (heroSection) {
+            heroSection.style.display = 'block';
+        }
+        
+        // Add the home page content
+        container.innerHTML = `
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="calculator-card">
+                        <h3>Popular Calculators</h3>
+                        <ul class="list-unstyled">
+                            <li><a href="#" onclick="loadCalculator('scientific-calculator')" class="btn btn-link">Scientific Calculator</a></li>
+                            <li><a href="#" onclick="loadCalculator('bmi')" class="btn btn-link">BMI Calculator</a></li>
+                            <li><a href="#" onclick="loadCalculator('currency-converter')" class="btn btn-link">Currency Converter</a></li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-8">
-                <div class="calculator-card">
-                    <h2>Welcome to CalcSuites</h2>
-                    <p>Select a calculator from the menu above to get started. Our tools are designed to help you with:</p>
-                    <div class="row mt-4">
-                        <div class="col-md-6">
-                            <h4>📊 Mathematics</h4>
-                            <p>Advanced calculations, fractions, matrices, and more</p>
-                        </div>
-                        <div class="col-md-6">
-                            <h4>💰 Finance</h4>
-                            <p>EMI, interest rates, investments, and ROI calculations</p>
-                        </div>
-                        <div class="col-md-6">
-                            <h4>🏃 Health & Fitness</h4>
-                            <p>BMI, body fat, calories, and fitness tracking</p>
-                        </div>
-                        <div class="col-md-6">
-                            <h4>⏰ Time & Date</h4>
-                            <p>Age calculation, time zones, and date differences</p>
+                <div class="col-md-8">
+                    <div class="calculator-card">
+                        <h2>Welcome to CalcSuites</h2>
+                        <p>Select a calculator from the menu above to get started. Our tools are designed to help you with:</p>
+                        <div class="row mt-4">
+                            <div class="col-md-6">
+                                <h4>📊 Mathematics</h4>
+                                <p>Advanced calculations, fractions, matrices, and more</p>
+                            </div>
+                            <div class="col-md-6">
+                                <h4>💰 Finance</h4>
+                                <p>EMI, interest rates, investments, and ROI calculations</p>
+                            </div>
+                            <div class="col-md-6">
+                                <h4>🏃 Health & Fitness</h4>
+                                <p>BMI, body fat, calories, and fitness tracking</p>
+                            </div>
+                            <div class="col-md-6">
+                                <h4>⏰ Time & Date</h4>
+                                <p>Age calculation, time zones, and date differences</p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    `;
+        `;
+    } catch (error) {
+        console.error('Error loading home page:', error);
+    }
 }
 
 // Utility functions
 function createCalculatorCard(title) {
-    const card = document.createElement('div');
-    card.className = 'card';
-    card.innerHTML = `
-        <div class="card-header">
-            <h5 class="card-title mb-0">${title}</h5>
-        </div>
-        <div class="card-body"></div>
-    `;
-    return card;
+    try {
+        const card = document.createElement('div');
+        card.className = 'calculator-card';
+        card.innerHTML = `
+            <h3>${title}</h3>
+            <div class="calculator-content"></div>
+        `;
+        return card;
+    } catch (error) {
+        console.error('Error creating calculator card:', error);
+        return null;
+    }
 }
 
 function formatNumber(number, decimals = 2) {
