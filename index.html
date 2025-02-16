@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#4361ee">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>CalcSuites - All-in-One Calculator</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="#" onclick="loadHomePage()">CalcSuites</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            General Tools
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('unit-converter')">Unit Converter</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('currency-converter')">Currency Converter</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            Student Tools
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('gpa')">GPA Calculator</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('grade')">Grade Calculator</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            Health & Fitness
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('bmi')">BMI Calculator</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('body-fat')">Body Fat Calculator</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('bmr')">BMR Calculator</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('ideal-weight')">Ideal Weight Calculator</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('one-rep-max')">One Rep Max Calculator</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('pace')">Pace Calculator</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('calories-burned')">Calories Burned Calculator</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('army-body-fat')">Army Body Fat Calculator</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('lean-body-mass')">Lean Body Mass Calculator</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('healthy-weight')">Healthy Weight Calculator</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            Date & Time
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('age')">Age Calculator</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('date')">Date Calculator</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('time')">Time Calculator</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('hours')">Hours Calculator</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('time-card')">Time Card Calculator</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('time-zone-converter')">Time Zone Converter</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('time-duration')">Time Duration Calculator</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('days-between-dates')">Days Between Dates</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('day-of-week')">Day of Week Calculator</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            Internet & Security
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('ip-subnet')">IP Subnet Calculator</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('password')">Password Generator</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('bandwidth')">Bandwidth Calculator</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            Finance & Business
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('emi')">EMI Calculator</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('interest')">Interest Calculator</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('investment')">Investment Calculator</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('finance')">Finance Calculator</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('compound-interest')">Compound Interest Calculator</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('interest-rate')">Interest Rate Calculator</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('savings')">Savings Calculator</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('simple-interest')">Simple Interest Calculator</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('cd')">CD Calculator</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('bond')">Bond Calculator</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('average-return')">Average Return Calculator</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('roi')">ROI Calculator</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('payback-period')">Payback Period Calculator</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('present-value')">Present Value Calculator</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('future-value')">Future Value Calculator</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            Mathematical
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('scientific-calculator')">Scientific Calculator</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('fraction-calculator')">Fraction Calculator</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('percentage-calculator')">Percentage Calculator</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('random-number-calculator')">Random Number Generator</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('exponent-calculator')">Exponent Calculator</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('binary-calculator')">Binary Calculator</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('matrix-calculator')">Matrix Calculator</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            Statistics
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('mean-median-mode-calculator')">Mean, Median & Mode</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('standard-deviation-calculator')">Standard Deviation</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('z-score-calculator')">Z-Score</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('probability-calculator')">Probability</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('number-sequence-calculator')">Number Sequence</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('permutation-combination-calculator')">Permutation & Combination</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('sample-size-calculator')">Sample Size</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('statistics')">Statistics Calculator</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('confidence-interval-calculator')">Confidence Interval</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            Geometry
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('pythagorean-calculator')">Pythagorean Theorem</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('rectangle-calculator')">Rectangle/Square</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('circle-calculator')">Circle</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('triangle-calculator')">Triangle</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('volume')">Volume Calculator</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('slope-calculator')">Slope</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('area')">Area Calculator</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('distance')">Distance Calculator</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('surface-area')">Surface Area Calculator</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('right-triangle-calculator')">Right Triangle</a></li>
+                        </ul>
+                    </li>
+                    <!-- Add more categories as dropdowns -->
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero-section">
+        <div class="container">
+            <h1>Welcome to CalcSuites</h1>
+            <p>Your all-in-one solution for calculations across finance, health, mathematics, and more. Simple, accurate, and always at your fingertips.</p>
+        </div>
+    </section>
+
+    <main class="container">
+        <div id="calculator-container">
+            <!-- Calculator content will be loaded here -->
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="calculator-card">
+                        <h3>Popular Calculators</h3>
+                        <ul class="list-unstyled">
+                            <li><a href="#" onclick="loadCalculator('scientific-calculator')" class="btn btn-link">Scientific Calculator</a></li>
+                            <li><a href="#" onclick="loadCalculator('bmi')" class="btn btn-link">BMI Calculator</a></li>
+                            <li><a href="#" onclick="loadCalculator('currency-converter')" class="btn btn-link">Currency Converter</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="calculator-card">
+                        <h2>Welcome to CalcSuites</h2>
+                        <p>Select a calculator from the menu above to get started. Our tools are designed to help you with:</p>
+                        <div class="row mt-4">
+                            <div class="col-md-6">
+                                <h4>📊 Mathematics</h4>
+                                <p>Advanced calculations, fractions, matrices, and more</p>
+                            </div>
+                            <div class="col-md-6">
+                                <h4>💰 Finance</h4>
+                                <p>EMI, interest rates, investments, and ROI calculations</p>
+                            </div>
+                            <div class="col-md-6">
+                                <h4>🏃 Health & Fitness</h4>
+                                <p>BMI, body fat, calories, and fitness tracking</p>
+                            </div>
+                            <div class="col-md-6">
+                                <h4>⏰ Time & Date</h4>
+                                <p>Age calculation, time zones, and date differences</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>About CalcSuites</h5>
+                    <p>CalcSuites is your comprehensive calculation toolkit, designed to make complex calculations simple and accessible.</p>
+                </div>
+                <div class="col-md-3">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" onclick="loadCalculator('scientific-calculator')">Scientific Calculator</a></li>
+                        <li><a href="#" onclick="loadCalculator('unit-converter')">Unit Converter</a></li>
+                        <li><a href="#" onclick="loadCalculator('bmi')">BMI Calculator</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5>Categories</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Mathematics</a></li>
+                        <li><a href="#">Finance</a></li>
+                        <li><a href="#">Health & Fitness</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-box-and-violin-plot@4.0.0/build/index.umd.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/calculators/unit-converter.js"></script>
+    <script src="js/calculators/currency-converter.js"></script>
+    <script src="js/calculators/bmi-calculator.js"></script>
+    <script src="js/calculators/bmr-calculator.js"></script>
+    <script src="js/calculators/body-fat-calculator.js"></script>
+    <script src="js/calculators/ideal-weight-calculator.js"></script>
+    <script src="js/calculators/one-rep-max-calculator.js"></script>
+    <script src="js/calculators/pace-calculator.js"></script>
+    <script src="js/calculators/calories-burned-calculator.js"></script>
+    <script src="js/calculators/army-body-fat-calculator.js"></script>
+    <script src="js/calculators/lean-body-mass-calculator.js"></script>
+    <script src="js/calculators/healthy-weight-calculator.js"></script>
+    <script src="js/calculators/gpa-calculator.js"></script>
+    <script src="js/calculators/grade-calculator.js"></script>
+    <script src="js/calculators/age-calculator.js"></script>
+    <script src="js/calculators/date-calculator.js"></script>
+    <script src="js/calculators/time-calculator.js"></script>
+    <script src="js/calculators/hours-calculator.js"></script>
+    <script src="js/calculators/time-card-calculator.js"></script>
+    <script src="js/calculators/time-zone-converter.js"></script>
+    <script src="js/calculators/time-duration-calculator.js"></script>
+    <script src="js/calculators/days-between-dates.js"></script>
+    <script src="js/calculators/day-of-week-calculator.js"></script>
+    <script src="js/calculators/ip-subnet-calculator.js"></script>
+    <script src="js/calculators/password-generator.js"></script>
+    <script src="js/calculators/bandwidth-calculator.js"></script>
+    <script src="js/calculators/emi-calculator.js"></script>
+    <script src="js/calculators/interest-calculator.js"></script>
+    <script src="js/calculators/simple-interest-calculator.js"></script>
+    <script src="js/calculators/compound-interest-calculator.js"></script>
+    <script src="js/calculators/interest-rate-calculator.js"></script>
+    <script src="js/calculators/investment-calculator.js"></script>
+    <script src="js/calculators/finance-calculator.js"></script>
+    <script src="js/calculators/savings-calculator.js"></script>
+    <script src="js/calculators/present-value-calculator.js"></script>
+    <script src="js/calculators/future-value-calculator.js"></script>
+    <script src="js/calculators/cd-calculator.js"></script>
+    <script src="js/calculators/bond-calculator.js"></script>
+    <script src="js/calculators/average-return-calculator.js"></script>
+    <script src="js/calculators/roi-calculator.js"></script>
+    <script src="js/calculators/payback-period-calculator.js"></script>
+    
+    <!-- Statistics Calculators -->
+    <script src="js/calculators/statistics/statistics-calculator.js"></script>
+    <script src="js/calculators/statistics/standard-deviation-calculator.js"></script>
+    <script src="js/calculators/statistics/mean-median-mode-calculator.js"></script>
+    <script src="js/calculators/statistics/probability-calculator.js"></script>
+    <script src="js/calculators/statistics/permutation-combination-calculator.js"></script>
+    <script src="js/calculators/statistics/sample-size-calculator.js"></script>
+    <script src="js/calculators/statistics/z-score-calculator.js"></script>
+    <script src="js/calculators/statistics/confidence-interval-calculator.js"></script>
+    <script src="js/calculators/statistics/number-sequence-calculator.js"></script>
+
+    <!-- Geometry Calculators -->
+    <script src="js/calculators/geometry/area-calculator.js"></script>
+    <script src="js/calculators/geometry/pythagorean-calculator.js"></script>
+    <script src="js/calculators/geometry/triangle-calculator.js"></script>
+    <script src="js/calculators/geometry/circle-calculator.js"></script>
+    <script src="js/calculators/geometry/rectangle-calculator.js"></script>
+    <script src="js/calculators/geometry/right-triangle-calculator.js"></script>
+    <script src="js/calculators/geometry/slope-calculator.js"></script>
+    <script src="js/calculators/geometry/volume-calculator.js"></script>
+    <script src="js/calculators/geometry/distance-calculator.js"></script>
+    <script src="js/calculators/geometry/surface-area-calculator.js"></script>
+    
+    <!-- Mathematical Calculators -->
+    <script src="js/calculators/mathematical/scientific-calculator.js"></script>
+    <script src="js/calculators/mathematical/fraction-calculator.js"></script>
+    <script src="js/calculators/mathematical/percentage-calculator.js"></script>
+    <script src="js/calculators/mathematical/random-number-calculator.js"></script>
+    <script src="js/calculators/mathematical/exponent-calculator.js"></script>
+    <script src="js/calculators/mathematical/binary-calculator.js"></script>
+    <script src="js/calculators/mathematical/matrix-calculator.js"></script>
+</body>
+</html>
