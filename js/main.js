@@ -86,20 +86,43 @@ function loadCalculator(type) {
         if (navbar) {
             navbar.style.display = 'block';
         }
+
+        // Get the calculator loading function name
+        const functionName = 'load' + type.split('-').map(word => 
+            word.charAt(0).toUpperCase() + word.slice(1)
+        ).join('') + 'Calculator';
+
+        // Get the calculator script
+        const scriptPath = `js/calculators/${type}-calculator.js`;
         
-        // Get the calculator loading function
-        const functionName = 'load' + type.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join('') + 'Calculator';
-        const calculatorFunction = window[functionName];
-        
-        if (typeof calculatorFunction !== 'function') {
-            throw new Error(`Calculator function ${functionName} not found. Make sure the calculator script is properly loaded.`);
+        // Check if script is already loaded
+        const existingScript = document.querySelector(`script[src="${scriptPath}"]`);
+        if (!existingScript) {
+            // Load the calculator script dynamically
+            const script = document.createElement('script');
+            script.src = scriptPath;
+            script.onload = () => {
+                // Once script is loaded, call the calculator function
+                if (typeof window[functionName] === 'function') {
+                    window[functionName]();
+                    trackCalculatorUse(type);
+                } else {
+                    throw new Error(`Calculator function ${functionName} not found`);
+                }
+            };
+            script.onerror = () => {
+                throw new Error(`Failed to load calculator script: ${scriptPath}`);
+            };
+            document.body.appendChild(script);
+        } else {
+            // Script already loaded, just call the function
+            if (typeof window[functionName] === 'function') {
+                window[functionName]();
+                trackCalculatorUse(type);
+            } else {
+                throw new Error(`Calculator function ${functionName} not found`);
+            }
         }
-        
-        // Load the calculator
-        calculatorFunction();
-        
-        // Track successful calculator load
-        trackCalculatorUse(type);
     } catch (error) {
         console.error('Error loading calculator:', error);
         
