@@ -404,13 +404,21 @@
     <!-- End Google Tag Manager (noscript) -->
     <script>
         function loadCalculator(type) {
-            const calculatorContent = document.getElementById('calculator-content');
-            if (!calculatorContent) return;
-
-            // Clear previous content
-            calculatorContent.innerHTML = '';
-
-            // Load calculator based on type
+            // Hide home page content
+            document.querySelector('.hero-section').style.display = 'none';
+            document.querySelector('.calculator-grid').style.display = 'none';
+            
+            // Show calculator container
+            const calculatorContainer = document.getElementById('calculator-container');
+            calculatorContainer.style.display = 'block';
+            
+            // Clear previous calculator content
+            calculatorContainer.innerHTML = '';
+            
+            // Keep navbar visible and functional
+            document.querySelector('.navbar').style.display = 'block';
+            
+            // Load the specific calculator
             switch(type) {
                 case 'age':
                     loadAgeCalculator();
@@ -566,7 +574,7 @@
                     loadIPSubnetCalculator();
                     break;
                 default:
-                    calculatorContent.innerHTML = '<div class="alert alert-danger">Calculator not found</div>';
+                    calculatorContainer.innerHTML = '<div class="alert alert-danger">Calculator not found</div>';
             }
 
             // Track calculator usage
