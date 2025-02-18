@@ -49,32 +49,44 @@ document.querySelectorAll('.dropdown-megamenu').forEach(menu => {
 });
 
 function loadCalculator(type) {
-    // Track last 5 used calculators
-    const history = JSON.parse(localStorage.getItem('calcHistory')) || [];
-    if (!history.includes(type)) {
-        history.unshift(type);
-        localStorage.setItem('calcHistory', JSON.stringify(history.slice(0, 5)));
-    }
-
     try {
         // Start tracking calculator usage
         startCalculatorTracking(type);
         
-        // Get the calculator container
-        const container = document.getElementById('calculator-container');
-        if (!container) {
-            throw new Error('Calculator container not found');
+        // Track last 5 used calculators
+        const history = JSON.parse(localStorage.getItem('calcHistory')) || [];
+        if (!history.includes(type)) {
+            history.unshift(type);
+            localStorage.setItem('calcHistory', JSON.stringify(history.slice(0, 5)));
         }
-        
-        // Clear previous calculator
-        container.innerHTML = '';
-        
-        // Hide the hero section when showing a calculator
+
+        // Hide home page content
         const heroSection = document.querySelector('.hero-section');
+        const calculatorGrid = document.querySelector('.calculator-grid');
+        
         if (heroSection) {
             heroSection.style.display = 'none';
         }
-
+        if (calculatorGrid) {
+            calculatorGrid.style.display = 'none';
+        }
+        
+        // Get and validate calculator container
+        const calculatorContainer = document.getElementById('calculator-container');
+        if (!calculatorContainer) {
+            throw new Error('Calculator container not found');
+        }
+        
+        // Show calculator container and clear previous content
+        calculatorContainer.style.display = 'block';
+        calculatorContainer.innerHTML = '';
+        
+        // Keep navbar visible
+        const navbar = document.querySelector('.navbar');
+        if (navbar) {
+            navbar.style.display = 'block';
+        }
+        
         // Get the calculator loading function
         const functionName = 'load' + type.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join('') + 'Calculator';
         const calculatorFunction = window[functionName];
