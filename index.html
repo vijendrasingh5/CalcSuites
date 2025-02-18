@@ -6,11 +6,11 @@
     <meta name="theme-color" content="#4361ee">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>CalcSuites - Your Trusted Partner for Accurate Calculations</title>
+    <title>CalcSuites - All-in-One Calculator</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <meta name="keywords" content="Online Calculator Suite, Free Online Calculators, EMI Calculator, BMI Calculator, Math Calculator, Unit Converter, Currency Converter">
     <meta name="google-site-verification" content="uY72lirrUAdqu5AW8piEuWHJVQy-exE22tEyJZZlSWE" />
     <meta name="google-adsense-account" content="ca-pub-9890356277412921">
@@ -21,41 +21,16 @@
     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
     })(window,document,'script','dataLayer','GTM-TD56M6XF');</script>
     <!-- End Google Tag Manager -->
-    <meta name="google-adsense-account" content="ca-pub-9890356277412921">
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebPage",
-      "name": "Free Online BMI Calculator",
-      "description": "Use our free BMI Calculator to check your Body Mass Index (BMI). Ideal for men, women & kids to maintain a healthy weight.",
-      "url": "https://calcsuites.netlify.app/bmi-calculator"
-    }
-    </script>
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebPage",
-      "name": "CalcSuites - Best Free Online Calculators for Finance, Health & Math",
-      "description": "Use 50+ free online calculators for BMI, EMI, Finance, Health, Math, and more. Best Online Calculator Suite with accurate results.",
-      "url": "https://calcsuites.netlify.app"
-    }
-    </script>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg sticky-top bg-light shadow-sm">
+    <nav class="navbar navbar-expand-lg">
         <div class="container">
-            <a class="navbar-brand" href="index.html">CalcSuites</a>
+            <a class="navbar-brand" href="#" onclick="loadHomePage()">CalcSuites</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.html">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="about.html">About</a>
-                    </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
                             General Tools
@@ -508,19 +483,83 @@
         </div>
     </nav>
 
+    <section class="hero-section">
+        <div class="container">
+            <h1>Your All-in-One Calculator Suite</h1>
+            <p>From finance to fitness, we've got the tools you need to make quick and accurate calculations.</p>
+            <button onclick="loadHomePage()" class="cta-button">Get Started</button>
+        </div>
+    </section>
+
+    <div class="featured-calculators container py-5">
+        <div class="featured-card">
+            <i class="fas fa-calculator"></i>
+            <h4>Scientific Calculator</h4>
+            <p>Perform advanced mathematical calculations with ease.</p>
+            <button onclick="loadCalculator('scientific-calculator')">Try Now</button>
+        </div>
+        <div class="featured-card">
+            <i class="fas fa-heartbeat"></i>
+            <h4>BMI Calculator</h4>
+            <p>Check your Body Mass Index and track your health.</p>
+            <button onclick="loadCalculator('bmi')">Try Now</button>
+        </div>
+    </div>
+
     <main class="container">
         <div class="row">
             <div class="col-md-4 mb-4">
                 <div class="calculator-card">
                     <h3>Popular Calculators</h3>
                     <ul class="list-unstyled">
-                        <li><a href="index.html" onclick="loadCalculator('scientific-calculator')" class="btn btn-link">Scientific Calculator</a></li>
-                        <li><a href="index.html" onclick="loadCalculator('bmi')" class="btn btn-link">BMI Calculator</a></li>
-                        <li><a href="index.html" onclick="loadCalculator('currency-converter')" class="btn btn-link">Currency Converter</a></li>
+                        <li><a href="#" onclick="loadCalculator('scientific-calculator')" class="btn btn-link">Scientific Calculator</a></li>
+                        <li><a href="#" onclick="loadCalculator('bmi')" class="btn btn-link">BMI Calculator</a></li>
+                        <li><a href="#" onclick="loadCalculator('currency-converter')" class="btn btn-link">Currency Converter</a></li>
                     </ul>
                 </div>
             </div>
             <div class="col-md-8">
+                <div class="calculator-card">
+                    <h3>Recommended for You</h3>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <div class="recommended-tool" onclick="loadCalculator('bmi')">
+                                <span><i class="fas fa-heartbeat"></i></span>
+                                <div>
+                                    <h5>BMI Calculator</h5>
+                                    <small>Check your Body Mass Index</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="recommended-tool" onclick="loadCalculator('currency-converter')">
+                                <span><i class="fas fa-coins"></i></span>
+                                <div>
+                                    <h5>Currency Converter</h5>
+                                    <small>Real-time exchange rates</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="recommended-tool" onclick="loadCalculator('scientific-calculator')">
+                                <span><i class="fas fa-calculator"></i></span>
+                                <div>
+                                    <h5>Scientific Calculator</h5>
+                                    <small>Advanced mathematical operations</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="recommended-tool" onclick="loadCalculator('age-calculator')">
+                                <span><i class="fas fa-hourglass-half"></i></span>
+                                <div>
+                                    <h5>Age Calculator</h5>
+                                    <small>Calculate exact age and duration</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div id="calculator-container" class="mt-4">
                     <!-- Calculator content will be loaded here -->
                 </div>
@@ -528,48 +567,153 @@
         </div>
     </main>
 
+    <div class="how-it-works container py-5">
+        <h3 class="text-center mb-5">How It Works</h3>
+        <div class="steps-container">
+            <div class="step">
+                <div class="step-icon">
+                    <i class="fas fa-search"></i>
+                </div>
+                <h4>Step 1: Choose a Calculator</h4>
+                <p>Select from our wide range of calculators.</p>
+            </div>
+            <div class="step">
+                <div class="step-icon">
+                    <i class="fas fa-edit"></i>
+                </div>
+                <h4>Step 2: Enter Your Inputs</h4>
+                <p>Fill in the required fields with your data.</p>
+            </div>
+            <div class="step">
+                <div class="step-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h4>Step 3: Get Instant Results</h4>
+                <p>View accurate results in seconds.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="testimonials container py-5">
+        <h3 class="text-center mb-4">What Our Users Say</h3>
+        <div class="testimonial-grid">
+            <div class="testimonial-card">
+                <p>"CalcSuites saved me so much time with its easy-to-use calculators!"</p>
+                <span>- John D.</span>
+            </div>
+            <div class="testimonial-card">
+                <p>"The BMI calculator helped me track my fitness goals effectively."</p>
+                <span>- Sarah L.</span>
+            </div>
+        </div>
+    </div>
+
     <footer class="site-footer">
         <div class="container">
             <div class="row">
-                <div class="col-md-12 text-center">
+                <div class="col-md-6">
                     <h5>About CalcSuites</h5>
-                    <p>Your comprehensive calculation toolkit...</p>
-                    <div class="legal-links">
-                        <a href="about.html">About Us</a> | 
-                        <a href="terms.html">Terms</a> | 
-                        <a href="privacy.html">Privacy</a>
-                    </div>
+                    <p>CalcSuites is your comprehensive calculation toolkit, designed to make complex calculations simple and accessible.</p>
+                </div>
+                <div class="col-md-3">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" onclick="loadCalculator('scientific-calculator')">Scientific Calculator</a></li>
+                        <li><a href="#" onclick="loadCalculator('unit-converter')">Unit Converter</a></li>
+                        <li><a href="#" onclick="loadCalculator('bmi')">BMI Calculator</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5>Categories</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Mathematics</a></li>
+                        <li><a href="#">Finance</a></li>
+                        <li><a href="#">Health & Fitness</a></li>
+                    </ul>
                 </div>
             </div>
         </div>
     </footer>
 
-    <!-- Core JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
-    
-    <!-- Main App JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-box-and-violin-plot@4.0.0/build/index.umd.min.js"></script>
     <script src="js/main.js"></script>
-    
-    <!-- Calculator Scripts -->
     <script src="js/calculators/unit-converter.js"></script>
     <script src="js/calculators/currency-converter.js"></script>
     <script src="js/calculators/bmi-calculator.js"></script>
     <script src="js/calculators/bmr-calculator.js"></script>
     <script src="js/calculators/body-fat-calculator.js"></script>
+    <script src="js/calculators/ideal-weight-calculator.js"></script>
+    <script src="js/calculators/one-rep-max-calculator.js"></script>
+    <script src="js/calculators/pace-calculator.js"></script>
+    <script src="js/calculators/calories-burned-calculator.js"></script>
+    <script src="js/calculators/army-body-fat-calculator.js"></script>
+    <script src="js/calculators/lean-body-mass-calculator.js"></script>
+    <script src="js/calculators/healthy-weight-calculator.js"></script>
+    <script src="js/calculators/gpa-calculator.js"></script>
+    <script src="js/calculators/grade-calculator.js"></script>
+    <script src="js/calculators/age-calculator.js"></script>
+    <script src="js/calculators/date-calculator.js"></script>
+    <script src="js/calculators/time-calculator.js"></script>
+    <script src="js/calculators/hours-calculator.js"></script>
+    <script src="js/calculators/time-card-calculator.js"></script>
+    <script src="js/calculators/time-zone-converter.js"></script>
+    <script src="js/calculators/time-duration-calculator.js"></script>
+    <script src="js/calculators/days-between-dates.js"></script>
+    <script src="js/calculators/day-of-week-calculator.js"></script>
+    <script src="js/calculators/ip-subnet-calculator.js"></script>
+    <script src="js/calculators/password-generator.js"></script>
+    <script src="js/calculators/bandwidth-calculator.js"></script>
     <script src="js/calculators/emi-calculator.js"></script>
-    <script src="js/calculators/compound-interest-calculator.js"></script>
+    <script src="js/calculators/interest-calculator.js"></script>
     <script src="js/calculators/simple-interest-calculator.js"></script>
+    <script src="js/calculators/compound-interest-calculator.js"></script>
+    <script src="js/calculators/interest-rate-calculator.js"></script>
+    <script src="js/calculators/investment-calculator.js"></script>
+    <script src="js/calculators/finance-calculator.js"></script>
+    <script src="js/calculators/savings-calculator.js"></script>
+    <script src="js/calculators/present-value-calculator.js"></script>
+    <script src="js/calculators/future-value-calculator.js"></script>
+    <script src="js/calculators/cd-calculator.js"></script>
+    <script src="js/calculators/bond-calculator.js"></script>
+    <script src="js/calculators/average-return-calculator.js"></script>
+    <script src="js/calculators/roi-calculator.js"></script>
+    <script src="js/calculators/payback-period-calculator.js"></script>
     
-    <!-- Mathematical Calculator Scripts -->
-    <script src="js/calculators/mathematical/scientific-calculator.js"></script>
-    <script src="js/calculators/mathematical/percentage-calculator.js"></script>
-    
-    <!-- Statistics Calculator Scripts -->
+    <!-- Statistics Calculators -->
     <script src="js/calculators/statistics/statistics-calculator.js"></script>
+    <script src="js/calculators/statistics/standard-deviation-calculator.js"></script>
+    <script src="js/calculators/statistics/mean-median-mode-calculator.js"></script>
+    <script src="js/calculators/statistics/probability-calculator.js"></script>
+    <script src="js/calculators/statistics/permutation-combination-calculator.js"></script>
+    <script src="js/calculators/statistics/sample-size-calculator.js"></script>
+    <script src="js/calculators/statistics/z-score-calculator.js"></script>
+    <script src="js/calculators/statistics/confidence-interval-calculator.js"></script>
+    <script src="js/calculators/statistics/number-sequence-calculator.js"></script>
+
+    <!-- Geometry Calculators -->
+    <script src="js/calculators/geometry/area-calculator.js"></script>
+    <script src="js/calculators/geometry/pythagorean-calculator.js"></script>
+    <script src="js/calculators/geometry/triangle-calculator.js"></script>
+    <script src="js/calculators/geometry/circle-calculator.js"></script>
+    <script src="js/calculators/geometry/rectangle-calculator.js"></script>
+    <script src="js/calculators/geometry/right-triangle-calculator.js"></script>
+    <script src="js/calculators/geometry/slope-calculator.js"></script>
+    <script src="js/calculators/geometry/volume-calculator.js"></script>
+    <script src="js/calculators/geometry/distance-calculator.js"></script>
+    <script src="js/calculators/geometry/surface-area-calculator.js"></script>
     
-    <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TD56M6XF"
+    <!-- Mathematical Calculators -->
+    <script src="js/calculators/mathematical/scientific-calculator.js"></script>
+    <script src="js/calculators/mathematical/fraction-calculator.js"></script>
+    <script src="js/calculators/mathematical/percentage-calculator.js"></script>
+    <script src="js/calculators/mathematical/random-number-calculator.js"></script>
+    <script src="js/calculators/mathematical/exponent-calculator.js"></script>
+    <script src="js/calculators/mathematical/binary-calculator.js"></script>
+    <script src="js/calculators/mathematical/matrix-calculator.js"></script>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TD56M6XF"
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
 </body>
