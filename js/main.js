@@ -3,9 +3,25 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('.dropdown-item').forEach(link => {
         link.addEventListener('click', function(e) {
             e.preventDefault();
-            const calculatorType = this.getAttribute('data-calculator') || 
-                                 this.getAttribute('onclick')?.match(/loadCalculator\('(.+)'\)/)?.[1];
+            e.stopPropagation(); // Stop event bubbling
+            
+            // Get calculator type from data attribute
+            const calculatorType = this.getAttribute('data-calculator');
+            
             if (calculatorType) {
+                // Close the dropdown menu
+                const dropdownMenu = this.closest('.dropdown-menu');
+                if (dropdownMenu) {
+                    const dropdown = dropdownMenu.closest('.dropdown');
+                    if (dropdown) {
+                        const toggle = dropdown.querySelector('.dropdown-toggle');
+                        if (toggle) {
+                            bootstrap.Dropdown.getInstance(toggle)?.hide();
+                        }
+                    }
+                }
+                
+                // Load the calculator
                 loadCalculator(calculatorType);
             }
         });
