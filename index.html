@@ -107,23 +107,24 @@
         }
     </script>
     <style>
-        /* Ensure dropdowns are fully visible */
+        /* Reset navbar styles */
+        .navbar-nav {
+            flex-wrap: wrap;
+            overflow-x: visible;
+        }
+        
+        /* Dropdown menu styling */
         .navbar .dropdown-menu {
-            max-height: 80vh;
-            overflow-y: auto;
+            max-height: none;
+            overflow-y: visible;
+            width: auto;
+            min-width: 250px;
         }
         
         /* Improve dropdown visibility */
         .navbar .dropdown:hover .dropdown-menu {
             display: block;
             margin-top: 0;
-        }
-        
-        /* Ensure navbar items don't wrap unnecessarily */
-        .navbar-nav {
-            flex-wrap: nowrap;
-            overflow-x: auto;
-            scrollbar-width: thin;
         }
         
         /* Improve dropdown item spacing */
@@ -135,13 +136,15 @@
         /* Make navbar more responsive */
         @media (max-width: 991px) {
             .navbar-nav {
-                max-height: 80vh;
-                overflow-y: auto;
+                width: 100%;
             }
             
             .navbar .dropdown-menu {
-                max-height: none;
-                overflow: visible;
+                width: 100%;
+            }
+            
+            .nav-item {
+                width: 100%;
             }
         }
     </style>
