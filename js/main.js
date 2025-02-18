@@ -1,10 +1,20 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Handle calculator selection
-    document.querySelectorAll('.dropdown-item').forEach(link => {
+    // Handle calculator selection from all possible sources
+    document.querySelectorAll('[data-calculator]').forEach(link => {
         link.addEventListener('click', function(e) {
             e.preventDefault();
-            const calculatorType = this.getAttribute('data-calculator') || 
-                                 this.getAttribute('onclick')?.match(/loadCalculator\('(.+)'\)/)?.[1];
+            const calculatorType = this.getAttribute('data-calculator');
+            if (calculatorType) {
+                loadCalculator(calculatorType);
+            }
+        });
+    });
+
+    // Handle calculator cards
+    document.querySelectorAll('.card[onclick]').forEach(card => {
+        card.addEventListener('click', function(e) {
+            const onclickValue = this.getAttribute('onclick');
+            const calculatorType = onclickValue?.match(/loadCalculator\('(.+)'\)/)?.[1];
             if (calculatorType) {
                 loadCalculator(calculatorType);
             }
@@ -43,7 +53,12 @@ function loadCalculator(type) {
     const container = document.getElementById('calculator-container');
     
     // Clear previous calculator
-    container.innerHTML = '';
+    if (container) {
+        container.innerHTML = '';
+    } else {
+        console.error('Calculator container not found');
+        return;
+    }
     
     // Hide the hero section when showing a calculator
     const heroSection = document.querySelector('.hero-section');
@@ -100,32 +115,7 @@ function loadCalculator(type) {
             case 'grade':
                 loadGradeCalculator();
                 break;
-            case 'scholarship':
-                loadScholarshipCalculator();
-                break;
-            case 'student-loan':
-                loadStudentLoanCalculator();
-                break;
-
-            // Real Estate
-            case 'mortgage':
-                loadMortgageCalculator();
-                break;
-            case 'property-tax':
-                loadPropertyTaxCalculator();
-                break;
-            case 'rent-vs-buy':
-                loadRentVsBuyCalculator();
-                break;
-
-            // Travel
-            case 'trip-cost':
-                loadTripCostCalculator();
-                break;
-            case 'mileage':
-                loadMileageCalculator();
-                break;
-
+                
             // Date & Time
             case 'age':
                 loadAgeCalculator();
@@ -170,438 +160,91 @@ function loadCalculator(type) {
             case 'emi':
                 loadEMICalculator();
                 break;
-            case 'investment':
-                loadInvestmentCalculator();
-                break;
-            case 'finance':
-                loadFinanceCalculator();
-                break;
             case 'compound-interest':
                 loadCompoundInterestCalculator();
-                break;
-            case 'interest-rate':
-            case 'interest-rate-calculator':
-                loadInterestRateCalculator();
-                break;
-            case 'interest':
-                loadInterestCalculator();
-                break;
-            case 'savings':
-                loadSavingsCalculator();
                 break;
             case 'simple-interest':
                 loadSimpleInterestCalculator();
                 break;
-            case 'cd':
-                loadCDCalculator();
-                break;
-            case 'bond':
-                loadBondCalculator();
-                break;
-            case 'average-return':
-                loadAverageReturnCalculator();
-                break;
-            case 'roi':
-                loadROICalculator();
-                break;
-            case 'payback-period':
-                loadPaybackPeriodCalculator();
-                break;
-            case 'present-value':
-                loadPresentValueCalculator();
-                break;
-            case 'future-value':
-                loadFutureValueCalculator();
-                break;
-
+                
             // Mathematical
-            case 'scientific-calculator':
+            case 'scientific':
                 loadScientificCalculator();
                 break;
-            case 'fraction-calculator':
-                loadFractionCalculator();
-                break;
-            case 'percentage-calculator':
+            case 'percentage':
                 loadPercentageCalculator();
                 break;
-            case 'random-number-calculator':
-                loadRandomNumberCalculator();
-                break;
-            case 'exponent-calculator':
-                loadExponentCalculator();
-                break;
-            case 'binary-calculator':
-                loadBinaryCalculator();
-                break;
-            case 'matrix-calculator':
-                loadMatrixCalculator();
-                break;
-            case 'binary':
-                loadBinaryCalculator();
-                break;
-            case 'hex':
-                loadHexCalculator();
-                break;
-            case 'half-life':
-                loadHalfLifeCalculator();
-                break;
-            case 'quadratic':
-                loadQuadraticCalculator();
-                break;
-            case 'log':
-                loadLogCalculator();
-                break;
-            case 'ratio':
-                loadRatioCalculator();
-                break;
-            case 'root':
-                loadRootCalculator();
-                break;
-            case 'lcm':
-                loadLCMCalculator();
-                break;
-            case 'gcf':
-                loadGCFCalculator();
-                break;
-            case 'factor':
-                loadFactorCalculator();
-                break;
-            case 'rounding':
-                loadRoundingCalculator();
-                break;
-            case 'matrix':
-                loadMatrixCalculator();
-                break;
-            case 'scientific-notation':
-                loadScientificNotationCalculator();
-                break;
-            case 'big-number':
-                loadBigNumberCalculator();
-                break;
-
-            // Statistics
-            case 'standard-deviation':
-            case 'standard-deviation-calculator':
-                loadStandardDeviationCalculator();
-                break;
-            case 'number-sequence':
-                loadNumberSequenceCalculator();
-                break;
-            case 'sample-size':
-                loadSampleSizeCalculator();
-                break;
-            case 'probability':
-                loadProbabilityCalculator();
-                break;
-            case 'statistics':
-                loadStatisticsCalculator();
-                break;
-            case 'mean-median-mode-calculator':
-                loadMeanMedianModeCalculator();
-                break;
-            case 'permutation-combination-calculator':
-                loadPermutationCombinationCalculator();
-                break;
-            case 'sample-size-calculator':
-                loadSampleSizeCalculator();
-                break;
-            case 'z-score-calculator':
-                loadZScoreCalculator();
-                break;
-            case 'probability-calculator':
-                loadProbabilityCalculator();
-                break;
-            case 'confidence-interval':
-                loadConfidenceIntervalCalculator();
-                break;
-            case 'number-sequence-calculator':
-                loadNumberSequenceCalculator();
-                break;
-            case 'confidence-interval-calculator':
-                loadConfidenceIntervalCalculator();
-                break;
-
-            // Geometry
-            case 'triangle':
-                loadTriangleCalculator();
-                break;
-            case 'triangle-calculator':
-                loadTriangleCalculator();
-                break;
-            case 'volume':
-                loadVolumeCalculator();
-                break;
-            case 'slope':
-                loadSlopeCalculator();
-                break;
-            case 'slope-calculator':
-                loadSlopeCalculator();
-                break;
-            case 'area':
-                loadAreaCalculator();
-                break;
-            case 'distance':
-                loadDistanceCalculator();
-                break;
-            case 'circle':
-                loadCircleCalculator();
-                break;
-            case 'circle-calculator':
-                loadCircleCalculator();
-                break;
-            case 'surface-area':
-                loadSurfaceAreaCalculator();
-                break;
-            case 'pythagorean':
-                loadPythagoreanCalculator();
-                break;
-            case 'pythagorean-calculator':
-                loadPythagoreanCalculator();
-                break;
-            case 'right-triangle':
-                loadRightTriangleCalculator();
-                break;
-            case 'right-triangle-calculator':
-                loadRightTriangleCalculator();
-                break;
-            case 'rectangle-calculator':
-                loadRectangleCalculator();
-                break;
+                
             default:
-                throw new Error(`Unknown calculator type: ${type}`);
+                console.error('Unknown calculator type:', type);
+                container.innerHTML = '<div class="alert alert-danger">Calculator not found</div>';
         }
     } catch (error) {
         console.error('Error loading calculator:', error);
-        container.innerHTML = '<div class="alert alert-danger">Error loading calculator. Please try again.</div>';
+        container.innerHTML = '<div class="alert alert-danger">Error loading calculator</div>';
     }
 }
 
 function loadHomePage() {
     const container = document.getElementById('calculator-container');
-    container.innerHTML = '<div class="welcome-message">Welcome to CalcSuites!</div>';
-}
-
-function loadGPACalculator() {
-    const html = `
-        <div class="calculator-card">
-            <h2>GPA Calculator</h2>
-            <div id="courses-container">
-                <div class="course-entry mb-3">
-                    <div class="row g-3">
+    
+    // Remove any existing content
+    container.innerHTML = '';
+    
+    // Show the hero section
+    const heroSection = document.querySelector('.hero-section');
+    if (heroSection) {
+        heroSection.style.display = 'block';
+    }
+    
+    // Add the home page content
+    container.innerHTML = `
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="calculator-card">
+                    <h3>Popular Calculators</h3>
+                    <ul class="list-unstyled">
+                        <li><a href="#" onclick="loadCalculator('scientific-calculator')" class="btn btn-link">Scientific Calculator</a></li>
+                        <li><a href="#" onclick="loadCalculator('bmi')" class="btn btn-link">BMI Calculator</a></li>
+                        <li><a href="#" onclick="loadCalculator('currency-converter')" class="btn btn-link">Currency Converter</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="calculator-card">
+                    <h2>Welcome to CalcSuites</h2>
+                    <p>Select a calculator from the menu above to get started. Our tools are designed to help you with:</p>
+                    <div class="row mt-4">
                         <div class="col-md-6">
-                            <input type="text" class="form-control" placeholder="Course Name">
+                            <h4>📊 Mathematics</h4>
+                            <p>Advanced calculations, fractions, matrices, and more</p>
                         </div>
-                        <div class="col-md-3">
-                            <select class="form-select grade-select">
-                                <option value="4">A</option>
-                                <option value="3">B</option>
-                                <option value="2">C</option>
-                                <option value="1">D</option>
-                                <option value="0">F</option>
-                            </select>
+                        <div class="col-md-6">
+                            <h4>💰 Finance</h4>
+                            <p>EMI, interest rates, investments, and ROI calculations</p>
                         </div>
-                        <div class="col-md-3">
-                            <input type="number" class="form-control credits" placeholder="Credits">
+                        <div class="col-md-6">
+                            <h4>🏃 Health & Fitness</h4>
+                            <p>BMI, body fat, calories, and fitness tracking</p>
+                        </div>
+                        <div class="col-md-6">
+                            <h4>⏰ Time & Date</h4>
+                            <p>Age calculation, time zones, and date differences</p>
                         </div>
                     </div>
                 </div>
             </div>
-            <button class="btn btn-secondary mb-3" onclick="addCourse()">Add Course</button>
-            <button class="btn btn-primary" onclick="calculateGPA()">Calculate GPA</button>
-            <div class="result-box mt-3"></div>
-        </div>
-    `;
-    document.getElementById('calculator-container').innerHTML = html;
+        `;
+    }
 }
 
-// Mortgage Calculator Implementation
-function loadMortgageCalculator() {
-    const html = `
+// Utility function to create calculator cards
+function createCalculatorCard(title) {
+    return `
         <div class="calculator-card">
-            <h2>Mortgage Calculator</h2>
-            <div class="row g-3">
-                <div class="col-md-6">
-                    <label>Loan Amount ($)</label>
-                    <input type="number" id="loanAmount" class="form-control">
-                </div>
-                <div class="col-md-6">
-                    <label>Interest Rate (%)</label>
-                    <input type="number" step="0.01" id="interestRate" class="form-control">
-                </div>
-                <div class="col-md-6">
-                    <label>Loan Term (years)</label>
-                    <input type="number" id="loanTerm" class="form-control">
-                </div>
-                <div class="col-md-6">
-                    <label>Down Payment ($)</label>
-                    <input type="number" id="downPayment" class="form-control">
-                </div>
-                <button class="btn btn-primary" onclick="calculateMortgage()">Calculate</button>
-                <div class="result-box mt-3"></div>
-            </div>
-        </div>
-    `;
-    document.getElementById('calculator-container').innerHTML = html;
-}
-
-// Helper function for GPA Calculator
-function addCourse() {
-    const coursesContainer = document.getElementById('courses-container');
-    const newCourse = document.createElement('div');
-    newCourse.className = 'course-entry mb-3';
-    newCourse.innerHTML = `
-        <div class="row g-3">
-            <div class="col-md-6">
-                <input type="text" class="form-control" placeholder="Course Name">
-            </div>
-            <div class="col-md-3">
-                <select class="form-select grade-select">
-                    <option value="4">A</option>
-                    <option value="3">B</option>
-                    <option value="2">C</option>
-                    <option value="1">D</option>
-                    <option value="0">F</option>
-                </select>
-            </div>
-            <div class="col-md-3">
-                <input type="number" class="form-control credits" placeholder="Credits">
-            </div>
-        </div>
-    `;
-    coursesContainer.appendChild(newCourse);
-}
-
-function calculateGPA() {
-    const grades = Array.from(document.querySelectorAll('.grade-select')).map(select => parseFloat(select.value));
-    const credits = Array.from(document.querySelectorAll('.credits')).map(input => parseFloat(input.value));
-    
-    let totalPoints = 0;
-    let totalCredits = 0;
-    
-    grades.forEach((grade, index) => {
-        totalPoints += grade * credits[index];
-        totalCredits += credits[index];
-    });
-    
-    const gpa = totalPoints / totalCredits;
-    document.querySelector('.result-box').innerHTML = `
-        <h4>Your GPA: ${gpa.toFixed(2)}</h4>
-        <p>Total Credits: ${totalCredits}</p>
-    `;
-}
-
-function calculateMortgage() {
-    const loanAmount = parseFloat(document.getElementById('loanAmount').value);
-    const interestRate = parseFloat(document.getElementById('interestRate').value) / 100 / 12;
-    const loanTerm = parseFloat(document.getElementById('loanTerm').value) * 12;
-    const downPayment = parseFloat(document.getElementById('downPayment').value) || 0;
-    
-    const principal = loanAmount - downPayment;
-    const monthlyPayment = principal * 
-        (interestRate * Math.pow(1 + interestRate, loanTerm)) / 
-        (Math.pow(1 + interestRate, loanTerm) - 1);
-    
-    document.querySelector('.result-box').innerHTML = `
-        <h4>Monthly Payment: $${monthlyPayment.toFixed(2)}</h4>
-        <p>Total Interest: $${(monthlyPayment * loanTerm - principal).toFixed(2)}</p>
-    `;
-}
-
-// Trip Cost Calculator Implementation
-function loadTripCostCalculator() {
-    const html = `
-        <div class="calculator-card">
-            <h2>Trip Cost Calculator</h2>
-            <div class="row g-3">
-                <div class="col-md-6">
-                    <label>Transportation Cost ($)</label>
-                    <input type="number" id="transportationCost" class="form-control" min="0">
-                </div>
-                <div class="col-md-6">
-                    <label>Accommodation Cost ($)</label>
-                    <input type="number" id="accommodationCost" class="form-control" min="0">
-                </div>
-                <div class="col-md-6">
-                    <label>Food & Dining ($)</label>
-                    <input type="number" id="foodCost" class="form-control" min="0">
-                </div>
-                <div class="col-md-6">
-                    <label>Activities & Entertainment ($)</label>
-                    <input type="number" id="activitiesCost" class="form-control" min="0">
-                </div>
-                <div class="col-md-6">
-                    <label>Number of Days</label>
-                    <input type="number" id="numDays" class="form-control" min="1">
-                </div>
-                <div class="col-md-6">
-                    <label>Number of People</label>
-                    <input type="number" id="numPeople" class="form-control" min="1">
-                </div>
-                <div class="col-12">
-                    <button class="btn btn-primary" onclick="calculateTripCost()">Calculate Total Cost</button>
-                </div>
-                <div class="result-box mt-3"></div>
-            </div>
-        </div>
-    `;
-    document.getElementById('calculator-container').innerHTML = html;
-}
-
-function calculateTripCost() {
-    const transportationCost = parseFloat(document.getElementById('transportationCost').value) || 0;
-    const accommodationCost = parseFloat(document.getElementById('accommodationCost').value) || 0;
-    const foodCost = parseFloat(document.getElementById('foodCost').value) || 0;
-    const activitiesCost = parseFloat(document.getElementById('activitiesCost').value) || 0;
-    const numDays = parseInt(document.getElementById('numDays').value) || 1;
-    const numPeople = parseInt(document.getElementById('numPeople').value) || 1;
-
-    const dailyCosts = (foodCost + activitiesCost) * numDays;
-    const totalCost = transportationCost + accommodationCost + dailyCosts;
-    const costPerPerson = totalCost / numPeople;
-
-    document.querySelector('.result-box').innerHTML = `
-        <h4>Trip Cost Summary</h4>
-        <p>Total Trip Cost: $${totalCost.toFixed(2)}</p>
-        <p>Cost per Person: $${costPerPerson.toFixed(2)}</p>
-        <p>Daily Cost: $${(dailyCosts / numDays).toFixed(2)}</p>
-    `;
-}
-
-// Mileage Calculator Implementation
-function loadMileageCalculator() {
-    const html = `
-        <div class="calculator-card">
-            <h2>Mileage Calculator</h2>
-            <div class="row g-3">
-                <div class="col-md-6">
-                    <label>Distance (miles)</label>
-                    <input type="number" id="distance" class="form-control" min="0">
-                </div>
-                <div class="col-md-6">
-                    <label>Fuel Efficiency (mpg)</label>
-                    <input type="number" id="fuelEfficiency" class="form-control" min="0">
-                </div>
-                <div class="col-md-6">
-                    <label>Fuel Price ($/gallon)</label>
-                    <input type="number" id="fuelPrice" class="form-control" min="0" step="0.01">
-                </div>
-                <div class="col-12">
-                    <button class="btn btn-primary" onclick="calculateMileage()">Calculate</button>
-                </div>
-                <div class="mileage-results mt-3">
-                    <div class="result-item">
-                        <h5>Fuel Required</h5>
-                        <div id="fuelRequired">-</div>
-                    </div>
-                    <div class="result-item">
-                        <h5>Fuel Cost</h5>
-                        <div id="fuelCost">-</div>
-                    </div>
-                    <div class="result-item">
-                        <h5>Cost per Mile</h5>
-                        <div id="costPerMile">-</div>
-                    </div>
-                </div>
+            <h2 class="text-center mb-4">${title}</h2>
+            <div class="calculator-form">
+                <!-- Calculator content will be inserted here -->
             </div>
         </div>
     `;
@@ -1232,6 +875,19 @@ function loadRectangleCalculator() {
     document.getElementById('calculator-container').innerHTML = createCalculatorCard('Rectangle Calculator (Coming Soon)');
 }
 
+// Utility function to format numbers
+function formatNumber(number, decimals = 2) {
+    return Number(number).toLocaleString(undefined, {
+        minimumFractionDigits: decimals,
+        maximumFractionDigits: decimals
+    });
+}
+
+// Utility function to validate number input
+function validateNumber(input) {
+    return !isNaN(input) && isFinite(input) && input !== '';
+}
+
 // Utility functions
 function createCalculatorCard(title) {
     const card = document.createElement('div');
@@ -1240,9 +896,7 @@ function createCalculatorCard(title) {
         <div class="card-header">
             <h5 class="card-title mb-0">${title}</h5>
         </div>
-        <div class="card-body">
-            <p>Coming soon...</p>
-        </div>
+        <div class="card-body"></div>
     `;
     return card;
 }
