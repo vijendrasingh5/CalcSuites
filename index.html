@@ -402,5 +402,233 @@
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TD56M6XF"
         height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
+    <script>
+        function loadCalculator(type) {
+            const calculatorContent = document.getElementById('calculator-content');
+            if (!calculatorContent) return;
+
+            // Clear previous content
+            calculatorContent.innerHTML = '';
+
+            // Load calculator based on type
+            switch(type) {
+                case 'age':
+                    loadAgeCalculator();
+                    break;
+                case 'army-body-fat':
+                    loadArmyBodyFatCalculator();
+                    break;
+                case 'bmi':
+                    loadBMICalculator();
+                    break;
+                case 'bmr':
+                    loadBMRCalculator();
+                    break;
+                case 'body-fat':
+                    loadBodyFatCalculator();
+                    break;
+                case 'calories-burned':
+                    loadCaloriesBurnedCalculator();
+                    break;
+                case 'healthy-weight':
+                    loadHealthyWeightCalculator();
+                    break;
+                case 'ideal-weight':
+                    loadIdealWeightCalculator();
+                    break;
+                case 'lean-body-mass':
+                    loadLeanBodyMassCalculator();
+                    break;
+                case 'one-rep-max':
+                    loadOneRepMaxCalculator();
+                    break;
+                case 'pace':
+                    loadPaceCalculator();
+                    break;
+                // Finance calculators
+                case 'average-return':
+                    loadAverageReturnCalculator();
+                    break;
+                case 'bond':
+                    loadBondCalculator();
+                    break;
+                case 'cd':
+                    loadCDCalculator();
+                    break;
+                case 'compound-interest':
+                    loadCompoundInterestCalculator();
+                    break;
+                case 'emi':
+                    loadEMICalculator();
+                    break;
+                case 'finance':
+                    loadFinanceCalculator();
+                    break;
+                case 'future-value':
+                    loadFutureValueCalculator();
+                    break;
+                case 'interest':
+                    loadInterestCalculator();
+                    break;
+                case 'interest-rate':
+                    loadInterestRateCalculator();
+                    break;
+                case 'investment':
+                    loadInvestmentCalculator();
+                    break;
+                case 'payback-period':
+                    loadPaybackPeriodCalculator();
+                    break;
+                case 'present-value':
+                    loadPresentValueCalculator();
+                    break;
+                case 'roi':
+                    loadROICalculator();
+                    break;
+                case 'savings':
+                    loadSavingsCalculator();
+                    break;
+                // Geometry calculators
+                case 'area':
+                    loadAreaCalculator();
+                    break;
+                case 'circle':
+                    loadCircleCalculator();
+                    break;
+                case 'distance':
+                    loadDistanceCalculator();
+                    break;
+                case 'pythagorean':
+                    loadPythagoreanCalculator();
+                    break;
+                case 'rectangle':
+                    loadRectangleCalculator();
+                    break;
+                case 'right-triangle':
+                    loadRightTriangleCalculator();
+                    break;
+                case 'slope':
+                    loadSlopeCalculator();
+                    break;
+                case 'surface-area':
+                    loadSurfaceAreaCalculator();
+                    break;
+                case 'triangle':
+                    loadTriangleCalculator();
+                    break;
+                case 'volume':
+                    loadVolumeCalculator();
+                    break;
+                // Mathematical calculators
+                case 'binary':
+                    loadBinaryCalculator();
+                    break;
+                case 'exponent':
+                    loadExponentCalculator();
+                    break;
+                case 'fraction':
+                    loadFractionCalculator();
+                    break;
+                case 'matrix':
+                    loadMatrixCalculator();
+                    break;
+                case 'percentage':
+                    loadPercentageCalculator();
+                    break;
+                case 'random-number':
+                    loadRandomNumberCalculator();
+                    break;
+                case 'scientific':
+                    loadScientificCalculator();
+                    break;
+                // Time & Date calculators
+                case 'date':
+                    loadDateCalculator();
+                    break;
+                case 'day-of-week':
+                    loadDayOfWeekCalculator();
+                    break;
+                case 'hours':
+                    loadHoursCalculator();
+                    break;
+                // Educational calculators
+                case 'gpa':
+                    loadGPACalculator();
+                    break;
+                case 'grade':
+                    loadGradeCalculator();
+                    break;
+                // Technical calculators
+                case 'bandwidth':
+                    loadBandwidthCalculator();
+                    break;
+                case 'ip-subnet':
+                    loadIPSubnetCalculator();
+                    break;
+                default:
+                    calculatorContent.innerHTML = '<div class="alert alert-danger">Calculator not found</div>';
+            }
+
+            // Track calculator usage
+            trackCalculatorUse(type);
+        }
+    </script>
+
+    <!-- Calculator Scripts -->
+    <script src="js/calculators/age-calculator.js"></script>
+    <script src="js/calculators/army-body-fat-calculator.js"></script>
+    <script src="js/calculators/bmi-calculator.js"></script>
+    <script src="js/calculators/bmr-calculator.js"></script>
+    <script src="js/calculators/body-fat-calculator.js"></script>
+    <script src="js/calculators/calories-burned-calculator.js"></script>
+    <script src="js/calculators/healthy-weight-calculator.js"></script>
+    <script src="js/calculators/ideal-weight-calculator.js"></script>
+    <script src="js/calculators/lean-body-mass-calculator.js"></script>
+    <script src="js/calculators/one-rep-max-calculator.js"></script>
+    <script src="js/calculators/pace-calculator.js"></script>
+    
+    <script src="js/calculators/average-return-calculator.js"></script>
+    <script src="js/calculators/bond-calculator.js"></script>
+    <script src="js/calculators/cd-calculator.js"></script>
+    <script src="js/calculators/compound-interest-calculator.js"></script>
+    <script src="js/calculators/emi-calculator.js"></script>
+    <script src="js/calculators/finance-calculator.js"></script>
+    <script src="js/calculators/future-value-calculator.js"></script>
+    <script src="js/calculators/interest-calculator.js"></script>
+    <script src="js/calculators/interest-rate-calculator.js"></script>
+    <script src="js/calculators/investment-calculator.js"></script>
+    <script src="js/calculators/payback-period-calculator.js"></script>
+    <script src="js/calculators/present-value-calculator.js"></script>
+    <script src="js/calculators/roi-calculator.js"></script>
+    <script src="js/calculators/savings-calculator.js"></script>
+    
+    <script src="js/calculators/geometry/area-calculator.js"></script>
+    <script src="js/calculators/geometry/circle-calculator.js"></script>
+    <script src="js/calculators/geometry/distance-calculator.js"></script>
+    <script src="js/calculators/geometry/pythagorean-calculator.js"></script>
+    <script src="js/calculators/geometry/rectangle-calculator.js"></script>
+    <script src="js/calculators/geometry/right-triangle-calculator.js"></script>
+    <script src="js/calculators/geometry/slope-calculator.js"></script>
+    <script src="js/calculators/geometry/surface-area-calculator.js"></script>
+    <script src="js/calculators/geometry/triangle-calculator.js"></script>
+    <script src="js/calculators/geometry/volume-calculator.js"></script>
+    
+    <script src="js/calculators/mathematical/binary-calculator.js"></script>
+    <script src="js/calculators/mathematical/exponent-calculator.js"></script>
+    <script src="js/calculators/mathematical/fraction-calculator.js"></script>
+    <script src="js/calculators/mathematical/matrix-calculator.js"></script>
+    <script src="js/calculators/mathematical/percentage-calculator.js"></script>
+    <script src="js/calculators/mathematical/random-number-calculator.js"></script>
+    <script src="js/calculators/mathematical/scientific-calculator.js"></script>
+    
+    <script src="js/calculators/date-calculator.js"></script>
+    <script src="js/calculators/day-of-week-calculator.js"></script>
+    <script src="js/calculators/hours-calculator.js"></script>
+    
+    <script src="js/calculators/gpa-calculator.js"></script>
+    <script src="js/calculators/grade-calculator.js"></script>
+    
+    <script src="js/calculators/bandwidth-calculator.js"></script>
+    <script src="js/calculators/ip-subnet-calculator.js"></script>
 </body>
 </html>
