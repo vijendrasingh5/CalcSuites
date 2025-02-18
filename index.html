@@ -106,6 +106,45 @@
             });
         }
     </script>
+    <style>
+        /* Ensure dropdowns are fully visible */
+        .navbar .dropdown-menu {
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        
+        /* Improve dropdown visibility */
+        .navbar .dropdown:hover .dropdown-menu {
+            display: block;
+            margin-top: 0;
+        }
+        
+        /* Ensure navbar items don't wrap unnecessarily */
+        .navbar-nav {
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            scrollbar-width: thin;
+        }
+        
+        /* Improve dropdown item spacing */
+        .dropdown-item {
+            padding: 8px 20px;
+            white-space: nowrap;
+        }
+        
+        /* Make navbar more responsive */
+        @media (max-width: 991px) {
+            .navbar-nav {
+                max-height: 80vh;
+                overflow-y: auto;
+            }
+            
+            .navbar .dropdown-menu {
+                max-height: none;
+                overflow: visible;
+            }
+        }
+    </style>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg">
@@ -123,6 +162,8 @@
                             <li><a class="dropdown-item" href="#" onclick="loadCalculator('currency-converter')">Currency Converter</a></li>
                             <li><a class="dropdown-item" href="#" onclick="loadCalculator('length-converter')">Length Converter</a></li>
                             <li><a class="dropdown-item" href="#" onclick="loadCalculator('weight-converter')">Weight Converter</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('temperature-converter')">Temperature Converter</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('speed-converter')">Speed Converter</a></li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
@@ -133,6 +174,8 @@
                             <li><a class="dropdown-item" href="#" onclick="loadCalculator('scientific')">Scientific</a></li>
                             <li><a class="dropdown-item" href="#" onclick="loadCalculator('matrix')">Matrix</a></li>
                             <li><a class="dropdown-item" href="#" onclick="loadCalculator('complex-number')">Complex Numbers</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('logarithm')">Logarithm</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('statistics')">Statistics</a></li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
@@ -142,16 +185,9 @@
                             <li><a class="dropdown-item" href="#" onclick="loadCalculator('perimeter')">Perimeter</a></li>
                             <li><a class="dropdown-item" href="#" onclick="loadCalculator('volume')">Volume</a></li>
                             <li><a class="dropdown-item" href="#" onclick="loadCalculator('triangle')">Triangle</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('circle')">Circle</a></li>
                             <li><a class="dropdown-item" href="#" onclick="loadCalculator('pythagorean')">Pythagorean</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Date & Time</a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('time-calculator')">Time Calculator</a></li>
-                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('time-zone')">Time Zone</a></li>
-                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('date-calculator')">Date Calculator</a></li>
-                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('age')">Age Calculator</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('surface-area')">Surface Area</a></li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
@@ -161,6 +197,40 @@
                             <li><a class="dropdown-item" href="#" onclick="loadCalculator('mortgage')">Mortgage Calculator</a></li>
                             <li><a class="dropdown-item" href="#" onclick="loadCalculator('investment')">Investment Calculator</a></li>
                             <li><a class="dropdown-item" href="#" onclick="loadCalculator('compound-interest')">Compound Interest</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('simple-interest')">Simple Interest</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('emi')">EMI Calculator</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('gst')">GST Calculator</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Date & Time</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('time-calculator')">Time Calculator</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('time-zone')">Time Zone Converter</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('date-calculator')">Date Calculator</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('age')">Age Calculator</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('days-between')">Days Between Dates</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('business-days')">Business Days</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Health & Fitness</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('bmi')">BMI Calculator</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('bmr')">BMR Calculator</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('body-fat')">Body Fat Calculator</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('calories')">Calorie Calculator</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('ideal-weight')">Ideal Weight</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Tech & Web</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('password-generator')">Password Generator</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('ip-subnet')">IP Subnet Calculator</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('bandwidth')">Bandwidth Calculator</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('data-transfer')">Data Transfer</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('download-time')">Download Time</a></li>
                         </ul>
                     </li>
                 </ul>
