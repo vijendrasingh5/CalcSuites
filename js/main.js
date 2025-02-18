@@ -40,339 +40,56 @@ function loadCalculator(type) {
         localStorage.setItem('calcHistory', JSON.stringify(history.slice(0, 5)));
     }
 
-    const container = document.getElementById('calculator-container');
-    
-    // Clear previous calculator
-    container.innerHTML = '';
-    
-    // Hide the hero section when showing a calculator
-    const heroSection = document.querySelector('.hero-section');
-    if (heroSection) {
-        heroSection.style.display = 'none';
-    }
-    
     try {
-        switch(type) {
-            // General Tools
-            case 'unit-converter':
-                loadUnitConverter();
-                break;
-            case 'currency-converter':
-                loadCurrencyConverter();
-                break;
-                
-            // Health & Fitness
-            case 'bmi':
-                loadBMICalculator();
-                break;
-            case 'bmr':
-                loadBMRCalculator();
-                break;
-            case 'body-fat':
-                loadBodyFatCalculator();
-                break;
-            case 'ideal-weight':
-                loadIdealWeightCalculator();
-                break;
-            case 'one-rep-max':
-                loadOneRepMaxCalculator();
-                break;
-            case 'pace':
-                loadPaceCalculator();
-                break;
-            case 'calories-burned':
-                loadCaloriesBurnedCalculator();
-                break;
-            case 'army-body-fat':
-                loadArmyBodyFatCalculator();
-                break;
-            case 'lean-body-mass':
-                loadLeanBodyMassCalculator();
-                break;
-            case 'healthy-weight':
-                loadHealthyWeightCalculator();
-                break;
-                
-            // Student Tools
-            case 'gpa':
-                loadGPACalculator();
-                break;
-            case 'grade':
-                loadGradeCalculator();
-                break;
-            case 'scholarship':
-                loadScholarshipCalculator();
-                break;
-            case 'student-loan':
-                loadStudentLoanCalculator();
-                break;
-
-            // Real Estate
-            case 'mortgage':
-                loadMortgageCalculator();
-                break;
-            case 'property-tax':
-                loadPropertyTaxCalculator();
-                break;
-            case 'rent-vs-buy':
-                loadRentVsBuyCalculator();
-                break;
-
-            // Travel
-            case 'trip-cost':
-                loadTripCostCalculator();
-                break;
-            case 'mileage':
-                loadMileageCalculator();
-                break;
-
-            // Date & Time
-            case 'age':
-                loadAgeCalculator();
-                break;
-            case 'date':
-                loadDateCalculator();
-                break;
-            case 'time':
-                loadTimeCalculator();
-                break;
-            case 'hours':
-                loadHoursCalculator();
-                break;
-            case 'time-card':
-                loadTimeCardCalculator();
-                break;
-            case 'time-zone-converter':
-                loadTimeZoneCalculator();
-                break;
-            case 'time-duration':
-                loadTimeDurationCalculator();
-                break;
-            case 'days-between-dates':
-                loadDaysBetweenDatesCalculator();
-                break;
-            case 'day-of-week':
-                loadDayOfWeekCalculator();
-                break;
-                
-            // Internet & Security
-            case 'ip-subnet':
-                loadIPSubnetCalculator();
-                break;
-            case 'password':
-                loadPasswordGenerator();
-                break;
-            case 'bandwidth':
-                loadBandwidthCalculator();
-                break;
-                
-            // Finance & Business
-            case 'emi':
-                loadEMICalculator();
-                break;
-            case 'investment':
-                loadInvestmentCalculator();
-                break;
-            case 'finance':
-                loadFinanceCalculator();
-                break;
-            case 'compound-interest':
-                loadCompoundInterestCalculator();
-                break;
-            case 'interest-rate':
-            case 'interest-rate-calculator':
-                loadInterestRateCalculator();
-                break;
-            case 'interest':
-                loadInterestCalculator();
-                break;
-            case 'savings':
-                loadSavingsCalculator();
-                break;
-            case 'simple-interest':
-                loadSimpleInterestCalculator();
-                break;
-            case 'cd':
-                loadCDCalculator();
-                break;
-            case 'bond':
-                loadBondCalculator();
-                break;
-            case 'average-return':
-                loadAverageReturnCalculator();
-                break;
-            case 'roi':
-                loadROICalculator();
-                break;
-            case 'payback-period':
-                loadPaybackPeriodCalculator();
-                break;
-            case 'present-value':
-                loadPresentValueCalculator();
-                break;
-            case 'future-value':
-                loadFutureValueCalculator();
-                break;
-
-            // Mathematical
-            case 'scientific-calculator':
-                loadScientificCalculator();
-                break;
-            case 'fraction-calculator':
-                loadFractionCalculator();
-                break;
-            case 'percentage-calculator':
-                loadPercentageCalculator();
-                break;
-            case 'random-number-calculator':
-                loadRandomNumberCalculator();
-                break;
-            case 'exponent-calculator':
-                loadExponentCalculator();
-                break;
-            case 'binary-calculator':
-                loadBinaryCalculator();
-                break;
-            case 'matrix-calculator':
-                loadMatrixCalculator();
-                break;
-            case 'binary':
-                loadBinaryCalculator();
-                break;
-            case 'hex':
-                loadHexCalculator();
-                break;
-            case 'half-life':
-                loadHalfLifeCalculator();
-                break;
-            case 'quadratic':
-                loadQuadraticCalculator();
-                break;
-            case 'log':
-                loadLogCalculator();
-                break;
-            case 'ratio':
-                loadRatioCalculator();
-                break;
-            case 'root':
-                loadRootCalculator();
-                break;
-            case 'lcm':
-                loadLCMCalculator();
-                break;
-            case 'gcf':
-                loadGCFCalculator();
-                break;
-            case 'factor':
-                loadFactorCalculator();
-                break;
-            case 'rounding':
-                loadRoundingCalculator();
-                break;
-            case 'matrix':
-                loadMatrixCalculator();
-                break;
-            case 'scientific-notation':
-                loadScientificNotationCalculator();
-                break;
-            case 'big-number':
-                loadBigNumberCalculator();
-                break;
-
-            // Statistics
-            case 'standard-deviation':
-            case 'standard-deviation-calculator':
-                loadStandardDeviationCalculator();
-                break;
-            case 'number-sequence':
-                loadNumberSequenceCalculator();
-                break;
-            case 'sample-size':
-                loadSampleSizeCalculator();
-                break;
-            case 'probability':
-                loadProbabilityCalculator();
-                break;
-            case 'statistics':
-                loadStatisticsCalculator();
-                break;
-            case 'mean-median-mode-calculator':
-                loadMeanMedianModeCalculator();
-                break;
-            case 'permutation-combination-calculator':
-                loadPermutationCombinationCalculator();
-                break;
-            case 'sample-size-calculator':
-                loadSampleSizeCalculator();
-                break;
-            case 'z-score-calculator':
-                loadZScoreCalculator();
-                break;
-            case 'probability-calculator':
-                loadProbabilityCalculator();
-                break;
-            case 'confidence-interval':
-                loadConfidenceIntervalCalculator();
-                break;
-            case 'number-sequence-calculator':
-                loadNumberSequenceCalculator();
-                break;
-            case 'confidence-interval-calculator':
-                loadConfidenceIntervalCalculator();
-                break;
-
-            // Geometry
-            case 'triangle':
-                loadTriangleCalculator();
-                break;
-            case 'triangle-calculator':
-                loadTriangleCalculator();
-                break;
-            case 'volume':
-                loadVolumeCalculator();
-                break;
-            case 'slope':
-                loadSlopeCalculator();
-                break;
-            case 'slope-calculator':
-                loadSlopeCalculator();
-                break;
-            case 'area':
-                loadAreaCalculator();
-                break;
-            case 'distance':
-                loadDistanceCalculator();
-                break;
-            case 'circle':
-                loadCircleCalculator();
-                break;
-            case 'circle-calculator':
-                loadCircleCalculator();
-                break;
-            case 'surface-area':
-                loadSurfaceAreaCalculator();
-                break;
-            case 'pythagorean':
-                loadPythagoreanCalculator();
-                break;
-            case 'pythagorean-calculator':
-                loadPythagoreanCalculator();
-                break;
-            case 'right-triangle':
-                loadRightTriangleCalculator();
-                break;
-            case 'right-triangle-calculator':
-                loadRightTriangleCalculator();
-                break;
-            case 'rectangle-calculator':
-                loadRectangleCalculator();
-                break;
-            default:
-                throw new Error(`Unknown calculator type: ${type}`);
+        // Start tracking calculator usage
+        startCalculatorTracking(type);
+        
+        // Get the calculator container
+        const container = document.getElementById('calculator-container');
+        if (!container) {
+            throw new Error('Calculator container not found');
         }
+        
+        // Clear previous calculator
+        container.innerHTML = '';
+        
+        // Hide the hero section when showing a calculator
+        const heroSection = document.querySelector('.hero-section');
+        if (heroSection) {
+            heroSection.style.display = 'none';
+        }
+
+        // Get the calculator loading function
+        const functionName = 'load' + type.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join('') + 'Calculator';
+        const calculatorFunction = window[functionName];
+        
+        if (typeof calculatorFunction !== 'function') {
+            throw new Error(`Calculator function ${functionName} not found. Make sure the calculator script is properly loaded.`);
+        }
+        
+        // Load the calculator
+        calculatorFunction();
+        
+        // Track successful calculator load
+        trackCalculatorUse(type);
     } catch (error) {
         console.error('Error loading calculator:', error);
-        container.innerHTML = '<div class="alert alert-danger">Error loading calculator. Please try again.</div>';
+        
+        // Show error message to user
+        const container = document.getElementById('calculator-container');
+        if (container) {
+            container.innerHTML = `
+                <div class="alert alert-danger" role="alert">
+                    <h4 class="alert-heading">Error Loading Calculator</h4>
+                    <p>${error.message}</p>
+                    <hr>
+                    <p class="mb-0">Please try refreshing the page. If the problem persists, contact support.</p>
+                </div>
+            `;
+        }
+        
+        // Track failed calculator load
+        trackCalculatorResult(type, false);
     }
 }
 
