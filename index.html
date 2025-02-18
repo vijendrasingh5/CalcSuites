@@ -116,91 +116,52 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
-                    <li class="nav-item dropdown position-static">
-                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" aria-label="General Tools menu">
-                            General Tools
-                        </a>
-                        <div class="dropdown-menu dropdown-megamenu" role="menu" aria-label="General Tools calculators">
-                            <div class="container">
-                                <div class="row g-4 py-3">
-                                    <!-- Unit Conversion -->
-                                    <div class="col-md-3">
-                                        <h5 class="megamenu-heading" id="unit-conversion-heading">
-                                            <i class="fas fa-exchange-alt me-2"></i>
-                                            Unit Conversion
-                                        </h5>
-                                        <ul class="list-unstyled" role="menu" aria-labelledby="unit-conversion-heading">
-                                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('unit-converter')" role="menuitem" aria-label="Unit Converter" tabindex="0">Unit Converter</a></li>
-                                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('length-converter')" role="menuitem" aria-label="Length Converter" tabindex="0">Length Converter</a></li>
-                                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('weight-converter')" role="menuitem" aria-label="Weight Converter" tabindex="0">Weight Converter</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">General Tools</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('unit-converter')">Unit Converter</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('currency-converter')">Currency Converter</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('length-converter')">Length Converter</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('weight-converter')">Weight Converter</a></li>
+                        </ul>
                     </li>
-                    <li class="nav-item dropdown position-static">
-                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" aria-label="Education menu">
-                            Education
-                        </a>
-                        <div class="dropdown-menu dropdown-megamenu" role="menu" aria-label="Education calculators">
-                            <div class="container">
-                                <div class="row g-4 py-3">
-                                    <!-- Academic Tools -->
-                                    <div class="col-md-3">
-                                        <h5 class="megamenu-heading" id="academic-tools-heading">Academic Tools</h5>
-                                        <ul class="list-unstyled" role="menu" aria-labelledby="academic-tools-heading">
-                                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('gpa')" role="menuitem" aria-label="GPA Calculator" tabindex="0">GPA Calculator</a></li>
-                                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('grade')" role="menuitem" aria-label="Grade Calculator" tabindex="0">Grade Calculator</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Mathematical</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('percentage')">Percentage</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('fraction')">Fraction</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('scientific')">Scientific</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('matrix')">Matrix</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('complex-number')">Complex Numbers</a></li>
+                        </ul>
                     </li>
-                    <li class="nav-item dropdown position-static">
-                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" aria-label="Date and Time menu">
-                            Date & Time
-                        </a>
-                        <div class="dropdown-menu dropdown-megamenu" role="menu" aria-label="Date and Time calculators">
-                            <div class="container">
-                                <div class="row g-4 py-3">
-                                    <!-- Time Calculations -->
-                                    <div class="col-md-3">
-                                        <h5 class="megamenu-heading" id="time-calc-heading">
-                                            <i class="fas fa-clock me-2"></i>
-                                            Time Calculations
-                                        </h5>
-                                        <ul class="list-unstyled" role="menu" aria-labelledby="time-calc-heading">
-                                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('time-calculator')" role="menuitem" aria-label="Time Calculator" tabindex="0">Time Calculator</a></li>
-                                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('time-zone')" role="menuitem" aria-label="Time Zone Converter" tabindex="0">Time Zone Converter</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Geometry</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('area')">Area</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('perimeter')">Perimeter</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('volume')">Volume</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('triangle')">Triangle</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('pythagorean')">Pythagorean</a></li>
+                        </ul>
                     </li>
-                    <li class="nav-item dropdown position-static">
-                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" aria-label="Mathematical menu">
-                            Mathematical
-                        </a>
-                        <div class="dropdown-menu dropdown-megamenu" role="menu" aria-label="Mathematical calculators">
-                            <div class="container">
-                                <div class="row g-4 py-3">
-                                    <!-- Basic Math -->
-                                    <div class="col-md-3">
-                                        <h5 class="megamenu-heading" id="basic-math-heading">
-                                            <i class="fas fa-calculator me-2"></i>
-                                            Basic Math
-                                        </h5>
-                                        <ul class="list-unstyled" role="menu" aria-labelledby="basic-math-heading">
-                                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('percentage')" role="menuitem" aria-label="Percentage Calculator" tabindex="0">Percentage</a></li>
-                                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('fraction')" role="menuitem" aria-label="Fraction Calculator" tabindex="0">Fraction</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Date & Time</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('time-calculator')">Time Calculator</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('time-zone')">Time Zone</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('date-calculator')">Date Calculator</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('age')">Age Calculator</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Finance</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('loan')">Loan Calculator</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('mortgage')">Mortgage Calculator</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('investment')">Investment Calculator</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="loadCalculator('compound-interest')">Compound Interest</a></li>
+                        </ul>
                     </li>
                 </ul>
             </div>
