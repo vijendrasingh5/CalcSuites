@@ -1239,6 +1239,82 @@ function loadRectangleCalculator() {
     document.getElementById('calculator-container').innerHTML = createCalculatorCard('Rectangle Calculator (Coming Soon)');
 }
 
+// Analytics Tracking Functions
+function trackCalculatorUse(calculatorType) {
+    gtag('event', 'calculator_use', {
+        'event_category': 'Calculator',
+        'event_label': calculatorType,
+        'calculator_type': calculatorType,
+        'value': 1
+    });
+}
+
+function trackCalculationTime(calculatorType, timeInSeconds) {
+    gtag('event', 'calculation_time', {
+        'event_category': 'Performance',
+        'event_label': calculatorType,
+        'calculator_type': calculatorType,
+        'value': timeInSeconds
+    });
+}
+
+function trackBlogRead(articleTitle, timeSpentSeconds) {
+    gtag('event', 'blog_read', {
+        'event_category': 'Engagement',
+        'event_label': articleTitle,
+        'article_title': articleTitle,
+        'time_spent': timeSpentSeconds
+    });
+}
+
+function trackCalculatorResult(calculatorType, hasResult) {
+    gtag('event', 'calculation_completed', {
+        'event_category': 'Conversion',
+        'event_label': calculatorType,
+        'calculator_type': calculatorType,
+        'has_result': hasResult
+    });
+}
+
+// Time tracking variables
+let startTime = Date.now();
+let calculatorStartTime = null;
+
+// Track time spent on blog articles
+if (document.querySelector('article.blog-post')) {
+    window.addEventListener('beforeunload', function() {
+        const timeSpent = Math.round((Date.now() - startTime) / 1000);
+        const articleTitle = document.querySelector('h1').innerText;
+        trackBlogRead(articleTitle, timeSpent);
+    });
+}
+
+// Track calculator usage time
+function startCalculatorTracking(calculatorType) {
+    calculatorStartTime = Date.now();
+    trackCalculatorUse(calculatorType);
+}
+
+function endCalculatorTracking(calculatorType, hasResult = true) {
+    if (calculatorStartTime) {
+        const timeSpent = Math.round((Date.now() - calculatorStartTime) / 1000);
+        trackCalculationTime(calculatorType, timeSpent);
+        trackCalculatorResult(calculatorType, hasResult);
+        calculatorStartTime = null;
+    }
+}
+
+// Add tracking to calculator buttons
+document.addEventListener('DOMContentLoaded', function() {
+    const calculatorButtons = document.querySelectorAll('[data-calculator-type]');
+    calculatorButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const calculatorType = this.dataset.calculatorType;
+            startCalculatorTracking(calculatorType);
+        });
+    });
+});
+
 // Utility functions
 function createCalculatorCard(title) {
     const card = document.createElement('div');
