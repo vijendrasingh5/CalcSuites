@@ -1,0 +1,133 @@
+/* Blog Styles */
+.blog-post {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.post-meta {
+    color: #666;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 1rem;
+}
+
+.post-meta span {
+    margin-right: 1.5rem;
+}
+
+.formula-box {
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    text-align: center;
+}
+
+.formula-box p {
+    margin-bottom: 0.5rem;
+    font-family: monospace;
+    font-size: 1.1rem;
+}
+
+.cta-box {
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    padding: 2rem;
+    text-align: center;
+}
+
+.blog-post h2 {
+    margin-top: 2.5rem;
+    margin-bottom: 1.5rem;
+    color: #333;
+}
+
+.blog-post h3 {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    color: #444;
+}
+
+.blog-post p {
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+}
+
+.blog-post ul, .blog-post ol {
+    margin-bottom: 1.5rem;
+}
+
+.blog-post li {
+    margin-bottom: 0.5rem;
+}
+
+.blog-post table {
+    margin: 2rem 0;
+}
+
+.breadcrumb {
+    background-color: transparent;
+    padding: 0.5rem 0;
+}
+
+.breadcrumb-item a {
+    color: #666;
+    text-decoration: none;
+}
+
+.breadcrumb-item.active {
+    color: #333;
+}
+
+/* Card hover effects */
+.card {
+    transition: transform 0.2s ease-in-out;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+/* Responsive images */
+.blog-post img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin: 2rem 0;
+}
+
+/* Code snippets */
+pre {
+    background-color: #f8f9fa;
+    padding: 1rem;
+    border-radius: 8px;
+    overflow-x: auto;
+}
+
+code {
+    font-family: monospace;
+    color: #e83e8c;
+}
+
+/* Table styles */
+.table {
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    border-radius: 8px;
+}
+
+.table thead th {
+    background-color: #f8f9fa;
+    border-bottom: 2px solid #dee2e6;
+}
+
+/* Print styles */
+@media print {
+    .navbar, .footer {
+        display: none;
+    }
+    
+    .blog-post {
+        max-width: 100%;
+    }
+}

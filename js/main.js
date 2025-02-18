@@ -376,121 +376,18 @@ function loadCalculator(type) {
     }
 }
 
-// Featured tools configuration with icons and descriptions
-const featuredTools = {
-    finance: [
-        { id: 'roi', name: 'ROI Calculator', icon: '📈', description: 'Calculate return on investment' },
-        { id: 'compound-interest', name: 'Compound Interest', icon: '💰', description: 'Plan your investments' },
-        { id: 'investment', name: 'Investment Calculator', icon: '📊', description: 'Analyze investment growth' }
-    ],
-    health: [
-        { id: 'bmi', name: 'BMI Calculator', icon: '⚖️', description: 'Check your body mass index' },
-        { id: 'calories-burned', name: 'Calories Burned', icon: '🔥', description: 'Track your workout results' },
-        { id: 'body-fat', name: 'Body Fat Calculator', icon: '💪', description: 'Estimate body fat percentage' }
-    ],
-    math: [
-        { id: 'scientific-calculator', name: 'Scientific Calculator', icon: '🧮', description: 'Advanced calculations' },
-        { id: 'unit-converter', name: 'Unit Converter', icon: '📏', description: 'Convert between units' },
-        { id: 'percentage-calculator', name: 'Percentage Calculator', icon: '💯', description: 'Calculate percentages' }
-    ]
-};
-
-// Get user's preferred category based on usage history
-function getUserPreferredCategory() {
-    const history = JSON.parse(localStorage.getItem('calcHistory')) || [];
-    const categoryCount = {};
-    
-    history.forEach(tool => {
-        for (const [category, tools] of Object.entries(featuredTools)) {
-            if (tools.some(t => t.id === tool)) {
-                categoryCount[category] = (categoryCount[category] || 0) + 1;
-            }
-        }
-    });
-    
-    return Object.entries(categoryCount).sort((a, b) => b[1] - a[1])[0]?.[0] || 'math';
-}
-
-// Get featured tools based on user preference and history
-function getFeaturedTools() {
-    const preferredCategory = getUserPreferredCategory();
-    const history = JSON.parse(localStorage.getItem('calcHistory')) || [];
-    let recommendedTools = [];
-    
-    // Add tools from preferred category
-    recommendedTools = recommendedTools.concat(featuredTools[preferredCategory]);
-    
-    // Add frequently used tools from other categories
-    Object.entries(featuredTools).forEach(([category, tools]) => {
-        if (category !== preferredCategory) {
-            tools.forEach(tool => {
-                if (history.includes(tool.id)) {
-                    recommendedTools.push(tool);
-                }
-            });
-        }
-    });
-    
-    // Ensure we have at least 4 tools
-    if (recommendedTools.length < 4) {
-        Object.values(featuredTools).flat().forEach(tool => {
-            if (recommendedTools.length < 4 && !recommendedTools.some(t => t.id === tool.id)) {
-                recommendedTools.push(tool);
-            }
-        });
-    }
-    
-    // Return top 4 tools
-    return recommendedTools.slice(0, 4);
-}
-
-// Update loadHomePage to show personalized recommendations
+// Update loadHomePage to show only the calculator interface
 function loadHomePage() {
     const container = document.getElementById('calculator-container');
-    const recentCalculators = JSON.parse(localStorage.getItem('calcHistory')) || [];
-    const featuredToolsList = getFeaturedTools();
+    container.innerHTML = '';
     
-    container.innerHTML = `
-        <div class="row">
-            <div class="col-md-4 mb-4">
-                <div class="calculator-card">
-                    <h3>Recent Tools</h3>
-                    <ul class="list-unstyled">
-                        ${recentCalculators.slice(0, 5).map(calc => `
-                            <li><a href="#" onclick="loadCalculator('${calc}')" class="btn btn-link">${formatCalculatorName(calc)}</a></li>
-                        `).join('')}
-                    </ul>
-                </div>
-            </div>
-            <div class="col-md-8">
-                <div class="calculator-card">
-                    <h3>Recommended for You</h3>
-                    <div class="row g-3">
-                        ${featuredToolsList.map(tool => `
-                            <div class="col-md-6">
-                                <div class="recommended-tool" onclick="loadCalculator('${tool.id}')">
-                                    <span>${tool.icon}</span>
-                                    <div>
-                                        <h5>${tool.name}</h5>
-                                        <small>${tool.description}</small>
-                                    </div>
-                                </div>
-                            </div>
-                        `).join('')}
-                    </div>
-                </div>
-            </div>
-        </div>
-    `;
+    const heroSection = document.querySelector('.hero-section');
+    if (heroSection) {
+        heroSection.style.display = 'block';
+    }
 }
 
-// Helper function to format calculator names
-function formatCalculatorName(id) {
-    return id.split('-')
-        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-        .join(' ');
-}
-
+// GPA Calculator Implementation
 function loadGPACalculator() {
     const html = `
         <div class="calculator-card">

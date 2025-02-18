@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+    <title>CalcSuites Blog</title>
+    <link>https://calcsuites.netlify.app/blog/</link>
+    <description>Calculator guides, tutorials, and tips from CalcSuites</description>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 18 Feb 2025 21:09:53 +0530</lastBuildDate>
+    <atom:link href="https://calcsuites.netlify.app/blog/feed.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+        <title>Tips for Using a Scientific Calculator</title>
+        <link>https://calcsuites.netlify.app/blog/scientific-calculator-guide.html</link>
+        <description>Master the advanced features of scientific calculators. Learn about trigonometry, logarithms, exponential functions, and more with our comprehensive guide.</description>
+        <pubDate>Tue, 18 Feb 2025 21:09:53 +0530</pubDate>
+        <guid>https://calcsuites.netlify.app/blog/scientific-calculator-guide.html</guid>
+    </item>
+    
+    <item>
+        <title>Understanding Compound Interest Calculations</title>
+        <link>https://calcsuites.netlify.app/blog/understanding-compound-interest.html</link>
+        <description>Master compound interest calculations with our comprehensive guide. Learn the formula, see practical examples, and use our calculator for accurate results.</description>
+        <pubDate>Tue, 18 Feb 2025 21:00:00 +0530</pubDate>
+        <guid>https://calcsuites.netlify.app/blog/understanding-compound-interest.html</guid>
+    </item>
+    
+    <item>
+        <title>How to Calculate BMI: A Complete Guide</title>
+        <link>https://calcsuites.netlify.app/blog/how-to-calculate-bmi.html</link>
+        <description>Learn how to calculate and interpret your Body Mass Index (BMI) with our comprehensive guide. Includes step-by-step instructions and health recommendations.</description>
+        <pubDate>Tue, 18 Feb 2025 20:00:00 +0530</pubDate>
+        <guid>https://calcsuites.netlify.app/blog/how-to-calculate-bmi.html</guid>
+    </item>
+</channel>
+</rss>

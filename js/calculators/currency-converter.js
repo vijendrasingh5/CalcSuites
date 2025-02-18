@@ -2,30 +2,17 @@ const currencies = {
     USD: { name: 'US Dollar', symbol: '$' },
     EUR: { name: 'Euro', symbol: '€' },
     GBP: { name: 'British Pound', symbol: '£' },
-    JPY: { name: 'Japanese Yen', symbol: '¥' },
-    AUD: { name: 'Australian Dollar', symbol: 'A$' },
-    CAD: { name: 'Canadian Dollar', symbol: 'C$' },
-    CHF: { name: 'Swiss Franc', symbol: 'Fr' },
-    CNY: { name: 'Chinese Yuan', symbol: '¥' },
-    INR: { name: 'Indian Rupee', symbol: '₹' },
-    NZD: { name: 'New Zealand Dollar', symbol: 'NZ$' }
+    JPY: { name: 'Japanese Yen', symbol: '¥' }
 };
 
-// Sample exchange rates (these should be updated from an API in production)
 const exchangeRates = {
-    USD: 1.00,
-    EUR: 0.83,
-    GBP: 0.72,
-    JPY: 110.25,
-    AUD: 1.35,
-    CAD: 1.25,
-    CHF: 0.91,
-    CNY: 6.45,
-    INR: 74.50,
-    NZD: 1.42
+    USD: 1.0,
+    EUR: 0.92,
+    GBP: 0.79,
+    JPY: 148.63
 };
 
-function loadCurrencyConverter() {
+function initCurrencyConverter() {
     const container = document.getElementById('calculator-container');
     const card = createCalculatorCard('Currency Converter');
     
@@ -36,36 +23,32 @@ function loadCurrencyConverter() {
         <div class="row">
             <div class="col-md-5">
                 <div class="mb-3">
-                    <label for="from-amount" class="form-label">Amount</label>
+                    <label for="amount" class="form-label">Amount</label>
                     <div class="input-group">
-                        <span class="input-group-text" id="from-symbol">$</span>
-                        <input type="number" class="form-control" id="from-amount" oninput="convertCurrency()">
+                        <input type="number" class="form-control" id="amount" oninput="convertCurrency()">
+                        <select class="form-select" id="from-currency" onchange="convertCurrency();">
+                            ${Object.keys(exchangeRates).map(currency => 
+                                `<option value="${currency}">${currency}</option>`
+                            ).join('')}
+                        </select>
                     </div>
                 </div>
-                <select class="form-select" id="from-currency" onchange="updateCurrencySymbols(); convertCurrency();">
-                    ${Object.entries(currencies).map(([code, {name}]) => 
-                        `<option value="${code}">${code} - ${name}</option>`
-                    ).join('')}
-                </select>
             </div>
             <div class="col-md-2 d-flex align-items-center justify-content-center">
-                <button class="btn btn-outline-primary" onclick="swapCurrencies()">
-                    ⇄
-                </button>
+                <i class="fas fa-arrow-right"></i>
             </div>
             <div class="col-md-5">
                 <div class="mb-3">
-                    <label for="to-amount" class="form-label">Converted Amount</label>
+                    <label for="result" class="form-label">Converted Amount</label>
                     <div class="input-group">
-                        <span class="input-group-text" id="to-symbol">€</span>
-                        <input type="number" class="form-control" id="to-amount" readonly>
+                        <input type="text" class="form-control" id="result" readonly>
+                        <select class="form-select" id="to-currency" onchange="convertCurrency();">
+                            ${Object.keys(exchangeRates).map(currency => 
+                                `<option value="${currency}">${currency}</option>`
+                            ).join('')}
+                        </select>
                     </div>
                 </div>
-                <select class="form-select" id="to-currency" onchange="updateCurrencySymbols(); convertCurrency();">
-                    ${Object.entries(currencies).map(([code, {name}]) => 
-                        `<option value="${code}" ${code === 'EUR' ? 'selected' : ''}>${code} - ${name}</option>`
-                    ).join('')}
-                </select>
             </div>
         </div>
         <div class="result-box mt-3">
@@ -75,47 +58,21 @@ function loadCurrencyConverter() {
     
     card.innerHTML += calculatorHTML;
     container.appendChild(card);
-    updateCurrencySymbols();
     convertCurrency();
-}
-
-function updateCurrencySymbols() {
-    const fromCurrency = document.getElementById('from-currency').value;
-    const toCurrency = document.getElementById('to-currency').value;
-    
-    document.getElementById('from-symbol').textContent = currencies[fromCurrency].symbol;
-    document.getElementById('to-symbol').textContent = currencies[toCurrency].symbol;
 }
 
 function convertCurrency() {
-    const fromAmount = parseFloat(document.getElementById('from-amount').value) || 0;
-    const fromCurrency = document.getElementById('from-currency').value;
-    const toCurrency = document.getElementById('to-currency').value;
+    const amount = parseFloat(document.getElementById('amount').value);
+    const from = document.getElementById('from-currency').value;
+    const to = document.getElementById('to-currency').value;
     
-    const fromRate = exchangeRates[fromCurrency];
-    const toRate = exchangeRates[toCurrency];
-    
-    const result = (fromAmount * toRate) / fromRate;
-    document.getElementById('to-amount').value = formatNumber(result, 2);
-    
-    // Update exchange rate display
-    const rate = (toRate / fromRate);
-    document.getElementById('exchange-rate-display').innerHTML = `
-        <strong>Exchange Rate:</strong><br>
-        1 ${fromCurrency} = ${formatNumber(rate, 4)} ${toCurrency}<br>
-        1 ${toCurrency} = ${formatNumber(1/rate, 4)} ${fromCurrency}
-    `;
-}
+    if (!amount) {
+        document.getElementById('result').value = 'Please enter a valid amount';
+        return;
+    }
 
-function swapCurrencies() {
-    const fromCurrency = document.getElementById('from-currency');
-    const toCurrency = document.getElementById('to-currency');
-    const fromAmount = document.getElementById('from-amount');
-    const toAmount = document.getElementById('to-amount');
+    const rate = exchangeRates[to] / exchangeRates[from];
+    const result = amount * rate;
     
-    [fromCurrency.value, toCurrency.value] = [toCurrency.value, fromCurrency.value];
-    [fromAmount.value, toAmount.value] = [toAmount.value, fromAmount.value];
-    
-    updateCurrencySymbols();
-    convertCurrency();
+    document.getElementById('result').value = result.toFixed(2);
 }
