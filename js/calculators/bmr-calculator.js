@@ -1,4 +1,4 @@
-function loadBMRCalculator() {
+function loadBmrCalculator() {
     const container = document.getElementById('calculator-container');
     const card = createCalculatorCard('BMR Calculator');
     
