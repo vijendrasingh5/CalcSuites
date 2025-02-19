@@ -127,6 +127,11 @@ function drawBMIGauge(ctx, width, height, bmi) {
     // Clear canvas
     ctx.clearRect(0, 0, width, height);
     
+    // Validate BMI value
+    if (isNaN(bmi) || bmi < 0) {
+        bmi = 0;
+    }
+    
     // Draw gauge background
     const gradient = ctx.createLinearGradient(0, 0, width, 0);
     gradient.addColorStop(0, '#81c784'); // Underweight
@@ -137,9 +142,11 @@ function drawBMIGauge(ctx, width, height, bmi) {
     ctx.fillStyle = gradient;
     ctx.fillRect(0, height/2, width, 20);
     
-    // Draw marker
+    // Draw marker only if BMI is valid and positive
     if (bmi > 0) {
         const position = Math.min((bmi / 40) * width, width);
+        
+        // Draw triangle marker
         ctx.beginPath();
         ctx.moveTo(position, height/2);
         ctx.lineTo(position - 10, height/2 - 15);
