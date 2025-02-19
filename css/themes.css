@@ -1,0 +1,66 @@
+:root[data-theme="light"] {
+    --bg-color: #ffffff;
+    --text-color: #333333;
+    --nav-bg: #f8f9fa;
+    --card-bg: #ffffff;
+    --card-border: #dee2e6;
+    --input-bg: #ffffff;
+    --input-border: #ced4da;
+    --btn-primary-bg: #4361ee;
+    --btn-primary-text: #ffffff;
+    --dropdown-bg: #ffffff;
+    --dropdown-text: #333333;
+    --dropdown-hover: #f8f9fa;
+}
+
+:root[data-theme="dark"] {
+    --bg-color: #1a1a1a;
+    --text-color: #f0f0f0;
+    --nav-bg: #2d2d2d;
+    --card-bg: #2d2d2d;
+    --card-border: #404040;
+    --input-bg: #333333;
+    --input-border: #404040;
+    --btn-primary-bg: #4361ee;
+    --btn-primary-text: #ffffff;
+    --dropdown-bg: #2d2d2d;
+    --dropdown-text: #f0f0f0;
+    --dropdown-hover: #404040;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.navbar {
+    background-color: var(--nav-bg);
+}
+
+.navbar-brand, .nav-link {
+    color: var(--text-color);
+}
+
+.card {
+    background-color: var(--card-bg);
+    border-color: var(--card-border);
+}
+
+.form-control {
+    background-color: var(--input-bg);
+    border-color: var(--input-border);
+    color: var(--text-color);
+}
+
+.dropdown-menu {
+    background-color: var(--dropdown-bg);
+}
+
+.dropdown-item {
+    color: var(--dropdown-text);
+}
+
+.dropdown-item:hover {
+    background-color: var(--dropdown-hover);
+}
