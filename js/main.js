@@ -1017,6 +1017,136 @@ function loadPasswordGenerator() {
     document.getElementById('calculator-container').innerHTML = createCalculatorCard('Password Generator (Coming Soon)');
 }
 
+// Engineering Tools
+function loadOhmsLawCalculator() {
+    const calculatorContainer = document.getElementById('calculator-container');
+    if (calculatorContainer) {
+        calculatorContainer.innerHTML = '';
+        calculatorContainer.appendChild(createOhmsLawCalculator());
+    }
+}
+
+// Time & Date Tools
+function loadTimeDiffCalculator() {
+    const calculator = document.createElement('div');
+    calculator.className = 'calculator-content';
+    calculator.innerHTML = `
+        <h2>Time Difference Calculator</h2>
+        <div class="form-group mb-3">
+            <label for="time1">First Time</label>
+            <input type="time" class="form-control" id="time1">
+        </div>
+        <div class="form-group mb-3">
+            <label for="time2">Second Time</label>
+            <input type="time" class="form-control" id="time2">
+        </div>
+        <button class="btn btn-primary" onclick="calculateTimeDifference()">Calculate</button>
+        <div id="timeDiffResult" class="mt-3"></div>
+    `;
+    const calculatorContainer = document.getElementById('calculator-container');
+    if (calculatorContainer) {
+        calculatorContainer.innerHTML = '';
+        calculatorContainer.appendChild(calculator);
+    }
+}
+
+function calculateTimeDifference() {
+    const time1 = document.getElementById('time1').value;
+    const time2 = document.getElementById('time2').value;
+    
+    if (!time1 || !time2) {
+        document.getElementById('timeDiffResult').innerHTML = 
+            '<div class="alert alert-warning">Please enter both times</div>';
+        return;
+    }
+
+    const [hours1, minutes1] = time1.split(':').map(Number);
+    const [hours2, minutes2] = time2.split(':').map(Number);
+    
+    let diffMinutes = (hours2 * 60 + minutes2) - (hours1 * 60 + minutes1);
+    if (diffMinutes < 0) {
+        diffMinutes += 24 * 60; // Add 24 hours if time2 is on the next day
+    }
+    
+    const hours = Math.floor(diffMinutes / 60);
+    const minutes = diffMinutes % 60;
+    
+    document.getElementById('timeDiffResult').innerHTML = 
+        `<div class="alert alert-info">Time Difference: ${hours} hours and ${minutes} minutes</div>`;
+    
+    // Track calculator usage
+    trackCalculatorUse('time-diff');
+}
+
+// Programming Tools
+function loadBaseConverterCalculator() {
+    const calculator = document.createElement('div');
+    calculator.className = 'calculator-content';
+    calculator.innerHTML = `
+        <h2>Number Base Converter</h2>
+        <div class="form-group mb-3">
+            <label for="inputNumber">Number</label>
+            <input type="text" class="form-control" id="inputNumber" placeholder="Enter a number">
+        </div>
+        <div class="form-group mb-3">
+            <label for="fromBase">From Base</label>
+            <select class="form-control" id="fromBase">
+                <option value="2">Binary (2)</option>
+                <option value="8">Octal (8)</option>
+                <option value="10" selected>Decimal (10)</option>
+                <option value="16">Hexadecimal (16)</option>
+            </select>
+        </div>
+        <div class="form-group mb-3">
+            <label for="toBase">To Base</label>
+            <select class="form-control" id="toBase">
+                <option value="2">Binary (2)</option>
+                <option value="8">Octal (8)</option>
+                <option value="10">Decimal (10)</option>
+                <option value="16" selected>Hexadecimal (16)</option>
+            </select>
+        </div>
+        <button class="btn btn-primary" onclick="convertBase()">Convert</button>
+        <div id="baseConversionResult" class="mt-3"></div>
+    `;
+    const calculatorContainer = document.getElementById('calculator-container');
+    if (calculatorContainer) {
+        calculatorContainer.innerHTML = '';
+        calculatorContainer.appendChild(calculator);
+    }
+}
+
+function convertBase() {
+    const input = document.getElementById('inputNumber').value;
+    const fromBase = parseInt(document.getElementById('fromBase').value);
+    const toBase = parseInt(document.getElementById('toBase').value);
+    
+    try {
+        // Convert input to decimal first
+        const decimal = parseInt(input, fromBase);
+        if (isNaN(decimal)) {
+            throw new Error('Invalid input number for the selected base');
+        }
+        
+        // Convert decimal to target base
+        let result = decimal.toString(toBase);
+        
+        // Format result based on target base
+        if (toBase === 16) {
+            result = result.toUpperCase();
+        }
+        
+        document.getElementById('baseConversionResult').innerHTML = 
+            `<div class="alert alert-info">Result: ${result}</div>`;
+    } catch (error) {
+        document.getElementById('baseConversionResult').innerHTML = 
+            `<div class="alert alert-danger">Error: ${error.message}</div>`;
+    }
+    
+    // Track calculator usage
+    trackCalculatorUse('base-converter');
+}
+
 // Analytics Tracking Functions
 function trackCalculatorUse(calculatorType) {
     gtag('event', 'calculator_use', {
