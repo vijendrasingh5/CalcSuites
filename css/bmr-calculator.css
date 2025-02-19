@@ -1,0 +1,130 @@
+.gender-selector {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.gender-selector .form-check-input:checked + .form-check-label {
+    color: #2196F3;
+}
+
+.gender-selector .form-check-label {
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.gender-selector .fas {
+    font-size: 1.5rem;
+    margin-right: 0.5rem;
+}
+
+.result-value {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #2196F3;
+    margin: 0.5rem 0;
+}
+
+.progress {
+    height: 1rem;
+    margin-top: 0.5rem;
+    background-color: #f0f0f0;
+}
+
+.progress-bar {
+    transition: width 0.6s ease;
+}
+
+.calorie-goals {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.goal-card {
+    padding: 1rem;
+    border-radius: 8px;
+    text-align: center;
+    transition: transform 0.2s;
+    cursor: pointer;
+}
+
+.goal-card:hover {
+    transform: translateY(-2px);
+}
+
+.goal-card.maintain {
+    background-color: #e3f2fd;
+    border: 2px solid #2196F3;
+}
+
+.goal-card.lose {
+    background-color: #f1f8e9;
+    border: 2px solid #4caf50;
+}
+
+.goal-card.gain {
+    background-color: #fff3e0;
+    border: 2px solid #ff9800;
+}
+
+.goal-card i {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: #555;
+}
+
+.goal-card strong {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #333;
+}
+
+.goal-card span {
+    display: block;
+    font-size: 1.2rem;
+    color: #2196F3;
+    font-weight: bold;
+}
+
+.goal-card small {
+    display: block;
+    color: #666;
+    margin-top: 0.25rem;
+}
+
+.history-item {
+    background-color: #f8f9fa;
+    border-left: 4px solid #2196F3;
+    padding: 0.75rem;
+    margin-bottom: 0.5rem;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+}
+
+.history-item:hover {
+    background-color: #e9ecef;
+}
+
+.history-item small {
+    color: #666;
+}
+
+.history-item hr {
+    margin: 0.5rem 0;
+}
+
+.form-text {
+    color: #666;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+}
+
+#bmr-gauge {
+    margin: 1rem 0;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}

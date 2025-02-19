@@ -1,0 +1,126 @@
+.bmi-scale-container {
+    position: relative;
+    width: 100%;
+    padding: 20px 0;
+}
+
+.bmi-scale {
+    display: flex;
+    width: 100%;
+    height: 40px;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.scale-segment {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+    padding: 5px;
+    position: relative;
+}
+
+.scale-segment span {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.scale-segment small {
+    font-size: 12px;
+    opacity: 0.8;
+}
+
+.scale-segment.underweight {
+    background-color: #81c784;
+}
+
+.scale-segment.normal {
+    background-color: #4caf50;
+}
+
+.scale-segment.overweight {
+    background-color: #ffd54f;
+}
+
+.scale-segment.obese {
+    background-color: #e57373;
+}
+
+.bmi-marker {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 2px;
+    height: 40px;
+    background-color: #000;
+    transform: translateX(-50%);
+    transition: left 0.3s ease-in-out;
+}
+
+.bmi-marker::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -4px;
+    width: 10px;
+    height: 10px;
+    background-color: #000;
+    transform: rotate(45deg);
+}
+
+#bmi-gauge {
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.history-item {
+    border-left: 4px solid #2196F3;
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #f8f9fa;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+}
+
+.history-item:hover {
+    background-color: #e9ecef;
+    cursor: pointer;
+}
+
+.form-text {
+    color: #666;
+    font-size: 12px;
+    margin-top: 4px;
+}
+
+.btn-calculate {
+    width: 100%;
+    margin-top: 15px;
+}
+
+.results-card {
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 5px;
+    background-color: #f8f9fa;
+}
+
+.bmi-value {
+    font-size: 24px;
+    font-weight: bold;
+    color: #2196F3;
+    margin-bottom: 10px;
+}
+
+.category-label {
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+.weight-range {
+    font-size: 14px;
+    color: #666;
+}
