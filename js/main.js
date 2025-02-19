@@ -93,59 +93,37 @@ function loadCalculator(type) {
             throw new Error('Calculator container not found');
         }
         
-        // Show calculator container and clear previous content
+        // Show the calculator container
         calculatorContainer.style.display = 'block';
-        calculatorContainer.innerHTML = '';
         
-        // Keep navbar visible
-        const navbar = document.querySelector('.navbar');
-        if (navbar) {
-            navbar.style.display = 'block';
-        }
-
-        // Get the calculator loading function name
-        const functionName = 'load' + type.split('-').map(word => 
-            word.charAt(0).toUpperCase() + word.slice(1)
-        ).join('') + 'Calculator';
-
-        // Get the calculator script
-        const scriptPath = `js/calculators/${type}-calculator.js`;
-        
-        // Check if script is already loaded
-        const existingScript = document.querySelector(`script[src="${scriptPath}"]`);
-        if (!existingScript) {
-            // Load the calculator script dynamically
-            const script = document.createElement('script');
-            script.src = scriptPath;
-            script.onload = () => {
-                // Once script is loaded, call the calculator function
-                if (typeof window[functionName] === 'function') {
-                    window[functionName]();
-                    trackCalculatorUse(type);
-                } else {
-                    throw new Error(`Calculator function ${functionName} not found`);
-                }
-            };
-            script.onerror = () => {
-                throw new Error(`Failed to load calculator script: ${scriptPath}`);
-            };
-            document.body.appendChild(script);
+        // Convert calculator type to function name
+        // Special case for IP subnet calculator
+        let functionName;
+        if (type === 'ip-subnet') {
+            functionName = 'loadIPSubnetCalculator';
         } else {
-            // Script already loaded, just call the function
-            if (typeof window[functionName] === 'function') {
-                window[functionName]();
-                trackCalculatorUse(type);
-            } else {
-                throw new Error(`Calculator function ${functionName} not found`);
-            }
+            functionName = 'load' + type.split('-')
+                .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+                .join('') + 'Calculator';
         }
+        
+        // Get the calculator function
+        const calculatorFunction = window[functionName];
+        if (typeof calculatorFunction !== 'function') {
+            throw new Error(`Calculator function ${functionName} not found`);
+        }
+        
+        // Call the calculator function
+        calculatorFunction();
+        
+        // Track calculator use
+        trackCalculatorUse(type);
+        
     } catch (error) {
         console.error('Error loading calculator:', error);
-        
-        // Show error message to user
-        const container = document.getElementById('calculator-container');
-        if (container) {
-            container.innerHTML = `
+        const calculatorContainer = document.getElementById('calculator-container');
+        if (calculatorContainer) {
+            calculatorContainer.innerHTML = `
                 <div class="alert alert-danger" role="alert">
                     <h4 class="alert-heading">Error Loading Calculator</h4>
                     <p>${error.message}</p>
@@ -153,10 +131,8 @@ function loadCalculator(type) {
                     <p class="mb-0">Please try refreshing the page. If the problem persists, contact support.</p>
                 </div>
             `;
+            calculatorContainer.style.display = 'block';
         }
-        
-        // Track failed calculator load
-        trackCalculatorResult(type, false);
     }
 }
 
@@ -802,13 +778,23 @@ function calculateCompoundInterest() {
     `;
 }
 
-// Placeholder functions for other calculators
-function loadScholarshipCalculator() {
-    document.getElementById('calculator-container').innerHTML = createCalculatorCard('Scholarship Calculator (Coming Soon)');
-}
-
+// IP Subnet Calculator Implementation
 function loadIPSubnetCalculator() {
-    document.getElementById('calculator-container').innerHTML = createCalculatorCard('IP Subnet Calculator (Coming Soon)');
+    const container = document.getElementById('calculator-container');
+    if (!container) {
+        console.error('Calculator container not found');
+        return;
+    }
+    
+    // Show the container if it's hidden
+    container.style.display = 'block';
+    
+    // Clear any existing content
+    container.innerHTML = '';
+    
+    // Create the calculator card
+    const card = createCalculatorCard('IP Subnet Calculator');
+    container.appendChild(card);
 }
 
 function loadPasswordGenerator() {
@@ -1021,6 +1007,14 @@ function loadRightTriangleCalculator() {
 
 function loadRectangleCalculator() {
     document.getElementById('calculator-container').innerHTML = createCalculatorCard('Rectangle Calculator (Coming Soon)');
+}
+
+function loadScholarshipCalculator() {
+    document.getElementById('calculator-container').innerHTML = createCalculatorCard('Scholarship Calculator (Coming Soon)');
+}
+
+function loadPasswordGenerator() {
+    document.getElementById('calculator-container').innerHTML = createCalculatorCard('Password Generator (Coming Soon)');
 }
 
 // Analytics Tracking Functions

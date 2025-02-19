@@ -182,7 +182,6 @@ function calculateBasicSubnet() {
         return;
     }
     
-    const ipParts = ip.split('.').map(Number);
     const networkBits = Math.ceil(Math.log2(required));
     const newMask = mask + networkBits;
     
@@ -195,14 +194,16 @@ function calculateBasicSubnet() {
     const hostsPerSubnet = Math.pow(2, 32 - newMask) - 2;
     const subnetIncrement = Math.pow(2, 32 - newMask);
     
-    let networkAddress = ipToNumber(ip);
+    let networkAddress = ipToNumber(ip) & (0xFFFFFFFF << (32 - mask));
     
     for (let i = 0; i < Math.pow(2, networkBits); i++) {
         const subnet = {
             network: numberToIP(networkAddress),
             firstHost: numberToIP(networkAddress + 1),
             lastHost: numberToIP(networkAddress + subnetIncrement - 2),
-            broadcast: numberToIP(networkAddress + subnetIncrement - 1)
+            broadcast: numberToIP(networkAddress + subnetIncrement - 1),
+            mask: newMask,
+            hosts: hostsPerSubnet
         };
         subnets.push(subnet);
         networkAddress += subnetIncrement;
@@ -214,18 +215,19 @@ function calculateBasicSubnet() {
 function calculateVLSM() {
     const network = document.getElementById('vlsm-network').value;
     const mask = parseInt(document.getElementById('vlsm-mask').value);
-    const requirements = Array.from(document.getElementsByClassName('vlsm-hosts'))
-        .map((input, index) => ({
-            hosts: parseInt(input.value) || 0,
-            name: document.getElementsByClassName('vlsm-name')[index].value || `Subnet ${index + 1}`
-        }))
-        .filter(req => req.hosts >= 2)
-        .sort((a, b) => b.hosts - a.hosts);
     
     if (!isValidIP(network) || isNaN(mask) || mask < 0 || mask > 32) {
         alert('Please enter a valid network address and mask');
         return;
     }
+    
+    const requirements = Array.from(document.getElementsByClassName('vlsm-hosts'))
+        .map((input, index) => ({
+            hosts: parseInt(input.value),
+            name: document.getElementsByClassName('vlsm-name')[index].value || `Subnet ${index + 1}`
+        }))
+        .filter(req => !isNaN(req.hosts) && req.hosts > 0)
+        .sort((a, b) => b.hosts - a.hosts);
     
     if (requirements.length === 0) {
         alert('Please enter at least one valid host requirement');
@@ -233,29 +235,28 @@ function calculateVLSM() {
     }
     
     const subnets = [];
-    let networkAddress = ipToNumber(network);
+    let networkAddress = ipToNumber(network) & (0xFFFFFFFF << (32 - mask));
     
     for (const req of requirements) {
-        const hostBits = Math.ceil(Math.log2(req.hosts + 2));
-        const subnetMask = 32 - hostBits;
-        const subnetSize = Math.pow(2, hostBits);
-        
-        if (subnetMask < mask) {
-            alert('Not enough address space for all requirements');
+        const requiredBits = 32 - Math.ceil(Math.log2(req.hosts + 2));
+        if (requiredBits < mask) {
+            alert(`Cannot allocate enough addresses for ${req.name}`);
             return;
         }
         
+        const subnetIncrement = Math.pow(2, 32 - requiredBits);
         const subnet = {
             name: req.name,
             network: numberToIP(networkAddress),
             firstHost: numberToIP(networkAddress + 1),
-            lastHost: numberToIP(networkAddress + subnetSize - 2),
-            broadcast: numberToIP(networkAddress + subnetSize - 1),
-            mask: subnetMask
+            lastHost: numberToIP(networkAddress + subnetIncrement - 2),
+            broadcast: numberToIP(networkAddress + subnetIncrement - 1),
+            mask: requiredBits,
+            hosts: Math.pow(2, 32 - requiredBits) - 2
         };
         
         subnets.push(subnet);
-        networkAddress += subnetSize;
+        networkAddress += subnetIncrement;
     }
     
     displayVLSMResults(network, mask, subnets);
@@ -264,83 +265,97 @@ function calculateVLSM() {
 function calculateSupernet() {
     const networks = Array.from(document.getElementsByClassName('supernet-ip'))
         .map((input, index) => ({
-            ip: input.value,
+            network: input.value,
             mask: parseInt(document.getElementsByClassName('supernet-mask')[index].value)
         }))
-        .filter(net => isValidIP(net.ip) && !isNaN(net.mask));
+        .filter(net => isValidIP(net.network) && !isNaN(net.mask));
     
     if (networks.length < 2) {
         alert('Please enter at least two valid networks');
         return;
     }
     
-    // Convert to binary and find common prefix
-    const binaries = networks.map(net => {
-        const ipNum = ipToNumber(net.ip);
-        return ipNum.toString(2).padStart(32, '0');
+    // Convert networks to binary
+    const networkBits = networks.map(net => {
+        const ipNum = ipToNumber(net.network);
+        return {
+            network: ipNum,
+            mask: net.mask,
+            binary: (ipNum >>> 0).toString(2).padStart(32, '0')
+        };
     });
     
+    // Find common prefix
     let commonPrefix = '';
-    let pos = 0;
-    
-    while (pos < 32) {
-        const bit = binaries[0][pos];
-        if (binaries.every(bin => bin[pos] === bit)) {
+    for (let i = 0; i < 32; i++) {
+        const bit = networkBits[0].binary[i];
+        if (networkBits.every(net => net.binary[i] === bit)) {
             commonPrefix += bit;
-            pos++;
         } else {
             break;
         }
     }
     
     const newMask = commonPrefix.length;
-    const supernetIP = numberToIP(parseInt(commonPrefix.padEnd(32, '0'), 2));
+    const supernetIP = numberToIP(networkBits[0].network & (0xFFFFFFFF << (32 - newMask)));
     
     displaySupernetResults(supernetIP, newMask, networks);
 }
 
 function displaySubnetResults(ip, oldMask, newMask, subnets) {
-    document.getElementById('subnet-result').style.display = 'block';
+    const resultDiv = document.getElementById('subnet-result');
+    const infoList = document.getElementById('subnet-info');
+    const breakdownBody = document.getElementById('subnet-breakdown').querySelector('tbody');
+    const binaryDiv = document.getElementById('subnet-binary');
     
-    // Show network information
-    document.getElementById('subnet-info').innerHTML = `
-        <li><strong>Original Network:</strong> ${ip}/${oldMask}</li>
-        <li><strong>New Subnet Mask:</strong> /${newMask} (${maskToDottedDecimal(newMask)})</li>
-        <li><strong>Hosts per Subnet:</strong> ${Math.pow(2, 32 - newMask) - 2}</li>
-        <li><strong>Total Subnets:</strong> ${subnets.length}</li>
+    // Display network information
+    infoList.innerHTML = `
+        <li>Original Network: ${ip}/${oldMask}</li>
+        <li>New Subnet Mask: ${maskToDottedDecimal(newMask)} (/${newMask})</li>
+        <li>Hosts per Subnet: ${subnets[0].hosts}</li>
+        <li>Total Subnets: ${subnets.length}</li>
     `;
     
-    // Show subnet breakdown
-    const tbody = document.querySelector('#subnet-breakdown tbody');
-    tbody.innerHTML = subnets.map((subnet, index) => `
+    // Display subnet breakdown
+    breakdownBody.innerHTML = subnets.map((subnet, index) => `
         <tr>
             <td>${index + 1}</td>
-            <td>${subnet.network}/${newMask}</td>
+            <td>${subnet.network}/${subnet.mask}</td>
             <td>${subnet.firstHost}</td>
             <td>${subnet.lastHost}</td>
             <td>${subnet.broadcast}</td>
         </tr>
     `).join('');
     
-    // Show binary representation
-    document.getElementById('subnet-binary').textContent = 
-        `Network: ${ipToBinary(ip)}
-Mask:    ${maskToBinary(newMask)}`;
+    // Display binary representation
+    binaryDiv.textContent = `
+Network ID:  ${ipToBinary(ip)}
+Subnet Mask: ${maskToBinary(newMask)}
+    `.trim();
+    
+    resultDiv.style.display = 'block';
 }
 
 function displayVLSMResults(network, mask, subnets) {
-    document.getElementById('subnet-result').style.display = 'block';
+    const resultDiv = document.getElementById('subnet-result');
+    const infoList = document.getElementById('subnet-info');
+    const breakdownBody = document.getElementById('subnet-breakdown').querySelector('tbody');
+    const binaryDiv = document.getElementById('subnet-binary');
     
-    // Show network information
-    document.getElementById('subnet-info').innerHTML = `
-        <li><strong>Major Network:</strong> ${network}/${mask}</li>
-        <li><strong>Total Subnets:</strong> ${subnets.length}</li>
-        <li><strong>Address Space Used:</strong> ${calculateAddressSpaceUsed(subnets)}%</li>
+    // Display network information
+    const totalHosts = subnets.reduce((sum, subnet) => sum + subnet.hosts, 0);
+    const addressSpaceUsed = calculateAddressSpaceUsed(subnets);
+    const efficiency = ((totalHosts / addressSpaceUsed) * 100).toFixed(2);
+    
+    infoList.innerHTML = `
+        <li>Major Network: ${network}/${mask}</li>
+        <li>Total Subnets: ${subnets.length}</li>
+        <li>Total Hosts: ${totalHosts}</li>
+        <li>Address Space Efficiency: ${efficiency}%</li>
     `;
     
-    // Show subnet breakdown
-    const tbody = document.querySelector('#subnet-breakdown tbody');
-    tbody.innerHTML = subnets.map(subnet => `
+    // Display subnet breakdown
+    breakdownBody.innerHTML = subnets.map(subnet => `
         <tr>
             <td>${subnet.name}</td>
             <td>${subnet.network}/${subnet.mask}</td>
@@ -350,52 +365,52 @@ function displayVLSMResults(network, mask, subnets) {
         </tr>
     `).join('');
     
-    // Show binary representation
-    document.getElementById('subnet-binary').textContent = 
-        subnets.map(subnet => 
-            `${subnet.name}:\n` +
-            `Network: ${ipToBinary(subnet.network)}\n` +
-            `Mask:    ${maskToBinary(subnet.mask)}\n`
-        ).join('\n');
+    // Display binary representation
+    binaryDiv.textContent = `
+Major Network: ${ipToBinary(network)}
+Subnet Mask:   ${maskToBinary(mask)}
+    `.trim();
+    
+    resultDiv.style.display = 'block';
 }
 
 function displaySupernetResults(supernetIP, newMask, networks) {
-    document.getElementById('subnet-result').style.display = 'block';
+    const resultDiv = document.getElementById('subnet-result');
+    const infoList = document.getElementById('subnet-info');
+    const breakdownBody = document.getElementById('subnet-breakdown').querySelector('tbody');
+    const binaryDiv = document.getElementById('subnet-binary');
     
-    // Show network information
-    document.getElementById('subnet-info').innerHTML = `
-        <li><strong>Supernet Network:</strong> ${supernetIP}/${newMask}</li>
-        <li><strong>Supernet Mask:</strong> ${maskToDottedDecimal(newMask)}</li>
-        <li><strong>Networks Combined:</strong> ${networks.length}</li>
-        <li><strong>Total Hosts:</strong> ${Math.pow(2, 32 - newMask) - 2}</li>
+    // Display network information
+    infoList.innerHTML = `
+        <li>Supernet: ${supernetIP}/${newMask}</li>
+        <li>Supernet Mask: ${maskToDottedDecimal(newMask)}</li>
+        <li>Networks Combined: ${networks.length}</li>
+        <li>Address Space: ${Math.pow(2, 32 - newMask)} addresses</li>
     `;
     
-    // Show network breakdown
-    const tbody = document.querySelector('#subnet-breakdown tbody');
-    tbody.innerHTML = networks.map((net, index) => `
+    // Display network breakdown
+    breakdownBody.innerHTML = networks.map((net, index) => `
         <tr>
             <td>${index + 1}</td>
-            <td>${net.ip}/${net.mask}</td>
-            <td colspan="3">${Math.pow(2, 32 - net.mask) - 2} hosts</td>
+            <td>${net.network}/${net.mask}</td>
+            <td colspan="3">Original Network</td>
         </tr>
     `).join('');
     
-    // Show binary representation
-    document.getElementById('subnet-binary').textContent = 
-        `Supernet: ${ipToBinary(supernetIP)}
-Mask:     ${maskToBinary(newMask)}
-
-Original Networks:
-${networks.map(net => 
-    `${net.ip}/${net.mask}:\n${ipToBinary(net.ip)}`
-).join('\n')}`;
+    // Display binary representation
+    binaryDiv.textContent = `
+Supernet:     ${ipToBinary(supernetIP)}
+Subnet Mask:  ${maskToBinary(newMask)}
+    `.trim();
+    
+    resultDiv.style.display = 'block';
 }
 
 // Utility functions
 function isValidIP(ip) {
+    if (!ip) return false;
     const parts = ip.split('.');
     if (parts.length !== 4) return false;
-    
     return parts.every(part => {
         const num = parseInt(part);
         return !isNaN(num) && num >= 0 && num <= 255;
@@ -403,7 +418,7 @@ function isValidIP(ip) {
 }
 
 function ipToNumber(ip) {
-    return ip.split('.').reduce((sum, octet) => (sum << 8) + parseInt(octet), 0) >>> 0;
+    return ip.split('.').reduce((acc, octet) => (acc << 8) + parseInt(octet), 0) >>> 0;
 }
 
 function numberToIP(num) {
@@ -416,24 +431,20 @@ function numberToIP(num) {
 }
 
 function maskToDottedDecimal(mask) {
-    const maskNum = ((1 << mask) - 1) << (32 - mask);
-    return numberToIP(maskNum);
+    const binary = '1'.repeat(mask) + '0'.repeat(32 - mask);
+    return numberToIP(parseInt(binary, 2));
 }
 
 function ipToBinary(ip) {
     return ip.split('.').map(octet => 
         parseInt(octet).toString(2).padStart(8, '0')
-    ).join('.');
+    ).join('');
 }
 
 function maskToBinary(mask) {
-    return '1'.repeat(mask) + '0'.repeat(32 - mask)
-        .match(/.{8}/g).join('.');
+    return '1'.repeat(mask) + '0'.repeat(32 - mask);
 }
 
 function calculateAddressSpaceUsed(subnets) {
-    const totalHosts = subnets.reduce((sum, subnet) => 
-        sum + Math.pow(2, 32 - subnet.mask), 0);
-    const majorNetworkSize = Math.pow(2, 32 - subnets[0].mask);
-    return ((totalHosts / majorNetworkSize) * 100).toFixed(2);
+    return subnets.reduce((total, subnet) => total + Math.pow(2, 32 - subnet.mask), 0);
 }
