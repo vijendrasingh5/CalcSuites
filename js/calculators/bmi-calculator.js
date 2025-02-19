@@ -1,4 +1,4 @@
-function initBMICalculator() {
+function loadBmiCalculator() {
     const container = document.getElementById('calculator-container');
     
     // BMI Calculator UI
