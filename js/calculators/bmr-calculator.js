@@ -148,7 +148,7 @@ function drawBMRGauge(ctx, width, height, percentage) {
     
     const centerX = width / 2;
     const centerY = height - 20;
-    const radius = Math.min(width / 2.5, height - 30);
+    const radius = Math.max(Math.min(width / 2.5, height - 30), 0);
     
     // Draw background arc
     ctx.beginPath();

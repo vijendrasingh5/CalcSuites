@@ -1,0 +1,33 @@
+/* Navbar and Search Bar Styles */
+.navbar-collapse {
+    display: flex !important;
+    flex-wrap: wrap;
+}
+
+.navbar-collapse form {
+    flex: 1;
+    max-width: 500px;
+    margin: 0 1rem;
+}
+
+.navbar-collapse .input-group {
+    width: 100%;
+}
+
+.navbar-collapse .input-group .form-control {
+    border-radius: 20px 0 0 20px;
+    border: 1px solid #dee2e6;
+}
+
+.navbar-collapse .input-group .btn {
+    border-radius: 0 20px 20px 0;
+    border: 1px solid #dee2e6;
+    border-left: none;
+}
+
+@media (max-width: 991px) {
+    .navbar-collapse form {
+        margin: 1rem 0;
+        max-width: 100%;
+    }
+}
